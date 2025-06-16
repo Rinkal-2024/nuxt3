@@ -1,0 +1,44 @@
+.center{
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.hide-overflow {
+    overflow: hidden;
+}
+
+.desktop {
+    display: none;
+    @include medium-and-large-screens {
+        display: block;
+    }
+}
+
+.mobile {
+    display: none;
+    @include small-and-medium-screens {
+        display: block;
+    }
+}
+
+.full-width-image {
+    display: block; 
+    width: 100%;
+}
+
+.html-view-image-wrapper {
+    position: relative;
+    width: 100%; /* Image will take up 100% width of its container */
+    overflow: hidden; /* Ensures nothing spills out of the container */
+}
+
+.html-view-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,71 @@
+<template>
+    <div class="category-articles"
+                :class="{ 'hidden': !visible }">
+        <Cards class="news-articles js-news-articles-container" >
+            <CardStyle2
+                v-for="article in articles"
+                :key="article.id"
+                :title="article.title"
+                :subtitle="article.subtitle"
+                :link-to="articleLink(article)"
+                :image="article.image"
+            />
+        </Cards>
+        <Link v-if="withButton" :to="categoryLink" without-styles>
+                <Button class="latest-news__see-more-btn" :name="`More ${categoryName} News`">
+                    {{ `More ${categoryName} News` }}
+                </Button>
+        </Link>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'LatestWeddingNewsList',
+    props: {
+        articles: {
+            type: Array,
+            required: true
+        },
+        visible: {
+            type: Boolean,
+            default: true,
+        },
+        withButton: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    computed: {
+         categoryLink() {
+            //console.log(this.articles);
+            const categorySlug = this.articles[0]?.category?.slug || this.articles[0]?.subcategory?.category?.slug
+            return `/news/${categorySlug}/`
+        },
+        categoryName() {
+           return this.articles[0]?.category?.name || this.articles[0]?.subcategory?.category?.name
+        }
+    },
+    methods: {
+        articleLink(article) {
+            const categorySlug = article?.category?.slug || article?.subcategory?.category?.slug
+            return `/news/${categorySlug}/${article.linkTo}/${article.id}`
+        }
+
+    }
+}
+</script>
+
+<style lang="scss">
+
+.latest-news__see-more-btn {
+        display: flex !important;
+        margin: 0 auto !important;
+        margin-top: 1rem !important;
+        letter-spacing: 0.1rem !important;
+        @include medium-and-large-screens {
+            margin-top: 2rem !important;
+        }
+    }
+
+</style>

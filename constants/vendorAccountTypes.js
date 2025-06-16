@@ -1,0 +1,6 @@
+export default {
+    TOP_LEVEL: "TOP_LEVEL",
+    MEDIUM_LEVEL: "MEDIUM_LEVEL",
+    ENTRY_LEVEL: "ENTRY_LEVEL",
+    FREE: "FREE"
+};

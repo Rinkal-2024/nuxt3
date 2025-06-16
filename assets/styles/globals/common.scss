@@ -1,0 +1,100 @@
+.colors-container {
+    display: flex;
+    margin: 0;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding: 0;
+    align-items: center;
+
+    &.--circular {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        max-width:10rem;
+        .color {
+            width: 2.5rem;
+            height: 2.5rem;
+            margin: 0.5rem 0 0.5rem 1rem;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+
+            &:hover {
+                transform: inherit;
+            }
+            &.--bright {
+                border: none !important;
+            }
+
+            &.--selected {
+                transform: none;
+            }
+            @include medium-and-large-screens {
+                width: 1.5rem;
+                height: 1.5rem;
+                margin: 0.25rem 0 0.25rem 0.5rem;
+            }
+        }
+    }
+}
+
+.color {
+    @include button-as-normal-text;
+    outline: none;
+    width: 1.5rem;
+    height: 0.75rem;
+    margin-top: 0.5rem;
+    transition: all 0.2s ease-out;
+    transition: font-size 0s;
+    font-size: 0;
+
+    &:focus-within {
+        z-index: 1;
+    }
+
+    &.--selected {
+        transform: scale(1.0, 1.75);
+
+    }
+
+    &.--bright {
+        border: $border-width solid $color-grey;
+    }
+}
+
+.slider_image, .slider_image img {
+    height: 20rem !important;
+    @include medium-and-large-screens {
+        height: 33rem !important;
+    }
+}
+
+#photo-library {
+    margin-top: 30px;
+}
+
+.button-wrapper {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.preload * {
+    transition: none !important;
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -ms-transition: none !important;
+    -o-transition: none !important;
+}
+
+.error {
+    color: $color-red;
+    @include apply-font-and-size('article', 6);
+    padding: 0.5rem 1rem 0;
+    text-align: center;
+}
+
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 230px;
+}

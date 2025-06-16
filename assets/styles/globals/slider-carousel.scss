@@ -1,0 +1,113 @@
+.slider {
+    width: 100%;
+    max-width: 1440px;
+    margin-right: auto;
+    margin-left: auto;
+    height: 20rem !important;
+    @include medium-and-large-screens {
+        height: 33rem !important;
+    }
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+     width: 100%;
+    max-width: 1440px;
+    height: 20rem !important;
+    @include medium-and-large-screens {
+        height: 33rem !important;
+    }
+    position: absolute;
+    transition: all 0.5s;
+}
+
+.slider-btn {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border: none;
+    z-index: 10;
+    cursor: pointer;
+    color: $color-white;
+    background-color: transparent;
+
+    @include medium-and-large-screens {
+        width: 3.125rem;
+        height: 3.125rem;
+    }
+
+    svg {
+        margin-top: -0.29375rem;
+        @include medium-and-large-screens {
+            margin-top: -0.235rem;
+        }
+        fill: $color-white;
+        filter: drop-shadow( 2px 2px 2px #000);
+    }
+}
+.slider-btn:active {
+    transform: scale(1.1);
+}
+.slider-btn-prev {
+    top: 45%;
+    left: 1rem;
+    @include medium-and-large-screens {
+        left: 2rem;
+    }
+}
+
+.slider-btn-next {
+    top: 45%;
+    right: 1rem;
+    @include medium-and-large-screens {
+        right: 2rem;
+    }
+    img {
+
+    }
+}
+
+.slider_titles {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    background-color: $color-black-transparent;
+    padding: 0.5rem;
+
+    &:hover {
+            text-decoration: underline !important;
+        }
+
+    a, h2, h3 {
+        color: $color-white;
+        text-decoration-color: $color-white !important;
+    }
+
+    h2 {
+        @include apply-font-and-size("heading", 3);
+        font-weight: bold;
+        font-style: normal;
+        text-transform: none;
+    }
+
+    h3 {
+        @include apply-font-and-size("heading", 4);
+        font-weight: 100;
+        font-style: italic;
+        text-transform: none;
+    }
+
+    @include medium-and-large-screens {
+        h2 {
+            @include apply-font-and-size("heading", 2);
+        }
+        h3 {
+            @include apply-font-and-size("heading", 9);
+        }
+    }
+}

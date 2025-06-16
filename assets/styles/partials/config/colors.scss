@@ -1,0 +1,38 @@
+$color-white: #ffffff;
+$color-darker-white: #f7f7f7;
+$color-black: #000000;
+$color-black-transparent: rgba(0, 0, 0, 0.75);
+$color-black-light-transparent: rgba(0, 0, 0, 0.2);
+$color-white-transparent: rgba(255, 255, 255, 0.85);
+
+$color-light-grey: #e6e6e6;
+$color-grey: #ececec;
+$color-dark-grey: #9a9a9a;
+$color-darker-grey: #595959;
+$color-silver: #c4c4c4;
+
+$color-red: #ff7777;
+$color-light-red: #fff0f0;
+
+$box-shadow-color: $color-dark-grey;
+
+$primary-border-color: $color-grey;
+$primary-background-color: $color-white;
+$primary-text-color: $color-black;
+
+$input-border-color: rgb(214, 214, 212);
+$input-border-disabled-color: $input-border-color;
+$input-background-color: $color-white;
+$input-text-color: $color-black;
+$input-placeholder-text-color: lighten($input-text-color, 50%);
+
+$button-border-color: $color-black;
+$button-background-color: $color-black;
+$button-text-color-1: $color-white;
+$button-text-color-2: $color-black;
+$button-disabled-color: $color-black;
+
+$error-border-color: $color-red;
+$error-background-color: $color-light-red;
+$error-text-color: $color-red;
+
