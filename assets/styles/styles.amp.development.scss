@@ -1,4 +1,4 @@
-@import 'assets/styles/partials/mixins';
-@import 'assets/styles/globals/fonts';
-@import "assets/styles/partials";
-@import "assets/styles/styles.amp.scss";
+@use 'assets/styles/partials/mixins' as *;
+@use 'assets/styles/globals/fonts' as *;
+@use "assets/styles/partials" as *;
+@use "assets/styles/styles.amp.scss" as *;

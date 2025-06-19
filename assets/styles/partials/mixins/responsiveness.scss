@@ -1,4 +1,4 @@
-@import "../config";
+@use '../config/responsiveness.scss' as *;
 
 @mixin small-screens {
     @media (max-width: #{$small-screen-min-width}) {

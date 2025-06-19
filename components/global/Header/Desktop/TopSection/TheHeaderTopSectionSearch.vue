@@ -1,44 +1,42 @@
 <template>
-    <form id="global-search-form" class="global-search-form">
-        <SearchInputWithButton
-            v-model="query"
-        />
-    </form>
+  <form id="global-search-form" class="global-search-form" @submit.prevent="search">
+    <SearchInputWithButton v-model="query" />
+  </form>
 </template>
 
-<script>
-export default {
-    name: 'TheHeaderTopSectionSearch',
-    data: () => ({
-        query: ''
-    }),
-    methods: {
-        async search() {
-            const currentRouteName = this.$route.name
+<script setup>
+import { ref, nextTick } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
-            await this.$router.push({
-                name: 'global_search',
-                query: {
-                    query: this.query
-                }
-            })
+const query = ref('')
+const router = useRouter()
+const route = useRoute()
 
-            if (currentRouteName === 'global_search') {
-                setTimeout(() => {
-                    this.$nuxt.refresh()
-                }, 0)
-            }
-        }
+const search = async () => {
+  const currentRouteName = route.name
+
+  await router.push({
+    name: 'global_search',
+    query: {
+      query: query.value
     }
+  })
+
+  if (currentRouteName === 'global_search') {
+    await nextTick(() => {
+      // Simulates this.$nuxt.refresh() by navigating to the same page
+      router.go(0)
+    })
+  }
 }
 </script>
 
 <style scoped lang="scss">
 .global-search-form {
-    flex: 1 1;
-    margin-right: 1rem;
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
+  flex: 1 1;
+  margin-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
 }
 </style>

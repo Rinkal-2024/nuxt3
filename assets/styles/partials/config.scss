@@ -1,6 +1,6 @@
-@import "./config/texts";
-@import "./config/responsiveness";
-@import "./config/colors";
-@import "./config/dimensions";
-@import "./config/zIndexes";
-@import "./config/others";
+@use "./config/texts.scss" as *;
+@use "./config/responsiveness.scss" as *;
+@use "./config/colors.scss" as *;
+@use "./config/dimensions.scss" as *;
+@use "./config/zIndexes.scss" as *;
+@use "./config/others.scss" as *;

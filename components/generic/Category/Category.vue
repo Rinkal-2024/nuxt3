@@ -1,15 +1,13 @@
 <template>
-    <Label>
-        <slot />
-    </Label>
+  <Label>
+    <slot />
+  </Label>
 </template>
 
-<script>
-export default {
-    name: 'Category'
-}
+<script setup lang="ts">
+// No props or logic needed
 </script>
 
 <style scoped>
-
+/* No styles */
 </style>

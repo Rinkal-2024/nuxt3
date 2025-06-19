@@ -1,31 +1,28 @@
 <template>
-    <PageSection
-        :title="title"
-        :subtitle="subtitle"
-        class="with-background"
-        withoutTopBodyMargin
-    >
-        <slot />
-    </PageSection>
+  <PageSection
+    :title="title"
+    :subtitle="subtitle"
+    class="with-background"
+    withoutTopBodyMargin
+  >
+    <slot />
+  </PageSection>
 </template>
 
-<script>
-export default {
-    name: 'VendorSearchSection',
-    props: {
-        title: {
-            type: String,
-            default: 'Vendor search'
-        },
-        subtitle: {
-            type: String,
-            required: false
-        }
-    }
-}
+<script setup lang="ts">
+defineProps({
+  title: {
+    type: String,
+    default: 'Vendor search'
+  },
+  subtitle: {
+    type: String,
+    required: false
+  }
+})
 </script>
 
 <style scoped lang="scss">
-// @import "~/assets/styles/partials";
+// @use '~/assets/styles/partials' as *;
 
 </style>

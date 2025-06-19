@@ -1,4 +1,4 @@
-@import "../config";
+@use "../config/texts.scss" as *;
 
 @mixin apply-font-and-size($type: "paragraph", $size: 3) {
   @if $type == "heading" {

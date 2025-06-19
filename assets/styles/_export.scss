@@ -1,7 +1,8 @@
-@import './partials/config/texts';
-@import './partials/config/responsiveness';
-@import './partials/config/colors';
-@import './partials/config/zIndexes';
+@use './partials/config/texts.scss' as *;
+@use './partials/config/responsiveness.scss' as *;
+@use './partials/config/colors.scss' as *;
+@use './partials/config/zIndexes.scss' as *;
+
 
 :export {
     // texts

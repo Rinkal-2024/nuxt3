@@ -48,7 +48,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "~/assets/styles/partials.scss";
+@use '../../../assets/styles/partials/mixins/linksAndButtons.scss' as *;
+
 
 .button {
     @include button;

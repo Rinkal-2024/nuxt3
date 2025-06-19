@@ -1,53 +1,48 @@
 <template>
-    <img
-            :src="src"
-            :alt="alt"
-            :width="width"
-            :height="height"
-            loading="lazy"
-            noloading
-    />
+  <img
+    :src="src"
+    :alt="alt"
+    :width="width"
+    :height="height"
+    loading="lazy"
+    noloading
+  />
 </template>
 
-<script>
+<script setup>
+import { computed } from 'vue'
 import icons from '~/assets/icons'
-export default {
-    name: 'Icon',
-    props: {
-        name: {
-            type: String,
-            required: true,
-            validator: value => {
-                return typeof icons[value] !== 'undefined'
-            }
-        },
-        isLight: {
-            type: Boolean,
-            default: false
-        },
-        width: {
-            type: String|Number,
-            default: '25px'
-        },
-        height: {
-            type: String|Number,
-            default: '25px'
-        }
-    },
-    computed: {
-        parsedName() {
-            return this.name + (this.isLight ? 'Light' : '')
-        },
-        src() {
-            return icons[this.parsedName]
-        },
-        alt() {
-            return `${this.name} icon`
-        }
-    }
-}
+
+// Define props with validation
+const props = defineProps({
+  name: {
+    type: String,
+    required: true,
+    validator: (value) => typeof icons[value] !== 'undefined'
+  },
+  isLight: {
+    type: Boolean,
+    default: false
+  },
+  width: {
+    type: [String, Number],
+    default: '25px'
+  },
+  height: {
+    type: [String, Number],
+    default: '25px'
+  }
+})
+
+// Computed parsedName with suffix if isLight is true
+const parsedName = computed(() => props.name + (props.isLight ? 'Light' : ''))
+
+// Computed src from icons map
+const src = computed(() => icons[parsedName.value])
+
+// Computed alt text
+const alt = computed(() => `${props.name} icon`)
 </script>
 
 <style scoped>
-
 </style>

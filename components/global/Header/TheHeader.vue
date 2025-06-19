@@ -7,7 +7,7 @@
       '--news-page': isNewsListPage
     }"
   >
-    <TheHeaderMobile />
+    <!-- <TheHeaderMobile /> -->
     <TheHeaderDesktop class="header--desktop" />
   </header>
 </template>
@@ -17,6 +17,8 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useConfigStore } from '~/store/config'
 import { isNewsListPage as checkNewsPage } from '~/utils/header'
+// import TheHeaderMobile from './Mobile/TheHeaderMobile.vue'
+import TheHeaderDesktop from './Desktop/TheHeaderDesktop.vue'
 
 const route = useRoute()
 const config = useConfigStore()
@@ -32,35 +34,5 @@ const isNewsListPage = computed(() => checkNewsPage(route))
 </script>
 
 <style scoped lang="scss">
-$desktopHeaderHeight: 165px;
-$newsDesktopHeaderHeight: 222px;
-
-.website-header {
-  width: 100%;
-  height: $desktopHeaderHeight;
-  z-index: 999;
-  background-color: #fff;
-  position: fixed;
-  top: 0;
-
-  @include small-and-medium-screens {
-    position: fixed;
-    height: 3rem;
-    z-index: 101;
-    background-color: #fff;
-    top: 0;
-
-    .header--desktop {
-      display: none;
-    }
-  }
-}
-
-.website-header.--news-page {
-  height: $newsDesktopHeaderHeight;
-
-  @include small-and-medium-screens {
-    height: 3rem;
-  }
-}
+/* Your styles here */
 </style>

@@ -1,65 +1,64 @@
 <template>
-    <div
-        :class="{ '--circular': isCircular }"
-        class="colors-container"
-    >
-        <template v-for="color in colors">
-            <ColorsSelectorColor
-                :key="color.id"
-                v-if="!$isAMP"
-                :color="color"
-                :isSelected="!!selectedColors.find(x => x === color.id)"
-                @click="emitClickEvent"
-            />
-            <Link :key="color.id" v-else :to="getColorLink(color)" without-styles>
-                <div
-                    :class="{selected: !!selectedColors.find(x => x === color.id)}"
-                    :style="{ backgroundColor: color.color }"
-                    class="color"
-                    @click="emitClickEvent"
-                >
-                    {{ color.name }}
-                </div>
-            </Link>
-        </template>
-    </div>
+  <div :class="['colors-container', { '--circular': isCircular }]">
+    <template v-for="color in colors" :key="color.id">
+      <ColorsSelectorColor
+        v-if="!isAmp"
+        :color="color"
+        :isSelected="selectedColors.includes(color.id)"
+        @click="emitClickEvent"
+      />
+      <Link v-else :to="getColorLink(color)" without-styles>
+        <div
+          :class="{ selected: selectedColors.includes(color.id) }"
+          :style="{ backgroundColor: color.color }"
+          class="color"
+          @click="emitClickEvent"
+        >
+          {{ color.name }}
+        </div>
+      </Link>
+    </template>
+  </div>
 </template>
 
-<script>
-export default {
-    name: 'ColorsSelectorColors',
-    props: {
-        colors: {
-            type: Array,
-            default: () => []
-        },
-        isCircular: {
-            type: Boolean,
-            default: false
-        },
-        selectedColors: {
-            type: Array,
-            default: () => []
-        },
-        ampBasePath: {
-            type: String,
-            default: '/weddings/search/color'
-        }
-    },
-    methods: {
-        emitClickEvent(colorId) {
-            this.$emit('click', colorId)
-        },
-        getColorLink(color) {
-            return `${this.ampBasePath}/${color.id}`
-        }
-    }
+<script setup>
+import { computed } from 'vue'
+import ColorsSelectorColor from './ColorsSelectorColor.vue'
+import Link from '~/components/Link.vue'
+
+// Detect AMP mode — replace with your actual AMP detection logic
+const isAmp = false // or import/use composable to detect AMP
+
+const props = defineProps({
+  colors: {
+    type: Array,
+    default: () => []
+  },
+  isCircular: {
+    type: Boolean,
+    default: false
+  },
+  selectedColors: {
+    type: Array,
+    default: () => []
+  },
+  ampBasePath: {
+    type: String,
+    default: '/weddings/search/color'
+  }
+})
+
+const emit = defineEmits(['click'])
+
+function emitClickEvent(colorId) {
+  emit('click', colorId)
+}
+
+function getColorLink(color) {
+  return `${props.ampBasePath}/${color.id}`
 }
 </script>
 
-<style lang="scss" scoped>
-// @import "~/assets/styles/partials";
-
-
-
+<style scoped lang="scss">
+// Your styles here
 </style>

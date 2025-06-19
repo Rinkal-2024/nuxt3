@@ -1,48 +1,41 @@
 <template>
-    <div
-        :class="{ '--bright': isBright, '--selected': isSelected }"
-        :style="{ backgroundColor: color.color }"
-        class="color"
-        :data-id="color.id"
-        @click="emitClickEvent"
-        :title="color.name"
-    >
-    </div>
+  <div
+    :class="['color', { '--bright': isBright, '--selected': isSelected }]"
+    :style="{ backgroundColor: color.color }"
+    :data-id="color.id"
+    @click="emitClickEvent"
+    :title="color.name"
+  >
+  </div>
 </template>
 
-<script>
-import detectBrightColorMixin from '~/mixins/detectBrightColorMixin'
+<script setup>
+import { computed } from 'vue'
+import { detectBrightColor } from '~/mixins/detectBrightColorMixin'
 
-export default {
-    name: 'ColorsSelectorColor',
-    props: {
-        isSelected: {
-            type: Boolean,
-            default: false
-        },
-        color: {
-            type: Object,
-            required: true,
-            validator: color => ['color', 'id', 'name'].every(property => color.hasOwnProperty(property))
-        }
-    },
-    computed: {
-        isBright() {
-            return this.detectBrightColor(this.color.color)
-        }
-    },
-    methods: {
-        emitClickEvent() {
-            this.$emit('click', this.color.id)
-        }
-    },
-    mixins: [
-        detectBrightColorMixin
-    ]
+defineProps({
+  isSelected: {
+    type: Boolean,
+    default: false
+  },
+  color: {
+    type: Object,
+    required: true,
+    validator: (color) => ['color', 'id', 'name'].every(prop => prop in color)
+  }
+})
+
+const emit = defineEmits(['click'])
+
+const props = defineProps()
+
+const isBright = computed(() => detectBrightColor(props.color.color))
+
+function emitClickEvent() {
+  emit('click', props.color.id)
 }
 </script>
 
 <style lang="scss" scoped>
-// @import "~/assets/styles/partials";
-
+/* Add your styles here */
 </style>

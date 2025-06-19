@@ -1,4 +1,4 @@
-@import "./mixins/responsiveness";
-@import "./mixins/linksAndButtons";
-@import "./mixins/fontsAndTexts";
-@import "./mixins/other";
+@use "./mixins/responsiveness.scss" as *;
+@use "./mixins/linksAndButtons.scss" as *;
+@use "./mixins/fontsAndTexts.scss" as *;
+@use "./mixins/other.scss" as *;

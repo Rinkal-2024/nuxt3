@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 $color-white: #ffffff;
 $color-darker-white: #f7f7f7;
 $color-black: #000000;
@@ -24,7 +26,7 @@ $input-border-color: rgb(214, 214, 212);
 $input-border-disabled-color: $input-border-color;
 $input-background-color: $color-white;
 $input-text-color: $color-black;
-$input-placeholder-text-color: lighten($input-text-color, 50%);
+$input-placeholder-text-color: color.adjust($input-text-color, $lightness: 50%);
 
 $button-border-color: $color-black;
 $button-background-color: $color-black;

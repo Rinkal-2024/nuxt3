@@ -14,8 +14,8 @@
                 <LatestWeddingNewsList 
                     v-for="articleList in articles" 
                     :key="articleList.id"
-                    :id=getDivId(articleList.id)
-                    :visible="articleList.id===1"
+                    :id="getDivId(articleList.id)"
+                    :visible="articleList.id === 1"
                     :articles="articleList.articles"
                     with-button
                 />
@@ -24,31 +24,25 @@
     </PageSection>
 </template>
 
-<script>
-import {mapGetters} from 'vuex'
+<script setup>
+import { useState } from 'nuxt3' // Using useState instead of Vuex
+import { ref, computed } from 'vue'
 
-export default {
-    name: 'HomePageLatestWeddingNews',
-    data: () => ({
-        title: 'Latest Wedding News',
-        subtitle: 'Expert wedding planning tips & inspiration',
-    }),
-    computed: {
-        ...mapGetters('home/latestNews', [
-            'articles',
-            'categories',
-        ]),
-        categoryLink() {
-            return `${this.linkTo}/${this.currentCategory.slug}/`
-        },
+// Reactive variables
+const title = ref('Latest Wedding News')
+const subtitle = ref('Expert wedding planning tips & inspiration')
 
-    },
-    methods: {
-        getDivId(id) { 
-            return `category-${id}-articles`;
-        }
-    }
-}
+// Replace Vuex with Nuxt 3's `useState` for state management
+const articles = useState('articles', () => [])
+const categories = useState('categories', () => [])
+
+// Compute categoryLink (if needed)
+const categoryLink = computed(() => {
+    return `${linkTo.value}/${currentCategory.value.slug}/`
+})
+
+// Method to generate div ID
+const getDivId = (id) => `category-${id}-articles`
 </script>
 
 <style lang="scss" scoped>
@@ -59,7 +53,6 @@ export default {
     align-items: center;
     flex-direction: column;
     flex: 1 1 100%;
-
 
     .latest-news__news-wrapper {
         display: flex;

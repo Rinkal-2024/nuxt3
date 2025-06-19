@@ -1,5 +1,17 @@
-@import "./globals/fonts";
-@import "./globals/general";
-@import "./globals/thirdParty";
-@import "./globals/utils";
-@import "./globals/common";
+@use './partials/config/colors.scss' as *;
+@use './partials/config/dimensions.scss' as *;
+@use './partials/config/others.scss' as *;
+@use './partials/config/responsiveness.scss' as *;
+@use './partials/config/texts.scss' as *;
+@use './partials/config/zIndexes.scss' as *;
+@use './partials.scss' as *;
+
+@use './partials/mixins/responsiveness.scss' as *;
+@use './partials/mixins/fontsAndTexts.scss' as *;
+@use './partials/mixins/linksAndButtons.scss' as *;
+@use './partials/mixins/other.scss' as *;
+
+@use "./globals/fonts" as *;
+@use "./globals/thirdParty" as *;
+
+@use './styles.amp.scss' as *;

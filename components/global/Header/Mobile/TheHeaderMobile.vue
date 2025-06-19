@@ -35,30 +35,30 @@ export default {
 <style scoped lang="scss">
 // @import "~/assets/styles/partials";
 
-.website-header__container {
-    width: 100%;
-    max-width: 1440px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background: #fff;
-}
+// .website-header__container {
+//     width: 100%;
+//     max-width: 1440px;
+//     margin-right: auto;
+//     margin-left: auto;
+//     padding-left: 1rem;
+//     padding-right: 1rem;
+//     background: #fff;
+// }
 
-.website-header__contents--mobile {
-    padding: 0 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    background-color: $color-white;
-    @include medium-and-large-screens {
-        display: none;
-    }
-}
+// .website-header__contents--mobile {
+//     padding: 0 1rem;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     flex-wrap: wrap;
+//     background-color: $color-white;
+//     @include medium-and-large-screens {
+//         display: none;
+//     }
+// }
 
-.logo {
-    height: 3rem;
-}
+// .logo {
+//     height: 3rem;
+// }
 
 </style>

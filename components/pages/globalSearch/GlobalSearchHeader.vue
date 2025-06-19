@@ -7,33 +7,33 @@
         <h1 class="search-results-title">
             Search results for:
             <span class="search-results-value">
-                  {{ globalSearchFieldValue }}
+                {{ globalSearchFieldValue }}
             </span>
         </h1>
         <GlobalSearchNavigation :totalCount="totalCount" @filter="$emit('filter')" />
     </PageSection>
-
 </template>
 
-<script>
-export default {
-    name: "GlobalSearchHeader",
-    props: {
-        globalSearchFieldValue: {
-            type: String,
-            required: true
-        },
-        totalCount: {
-            type: Number,
-            required: true
-        }
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+// Define component props
+const props = defineProps({
+    globalSearchFieldValue: {
+        type: String,
+        required: true
+    },
+    totalCount: {
+        type: Number,
+        required: true
     }
-}
+});
+
+// Define the event emitter (filter event)
+const emit = defineEmits(['filter']);
 </script>
 
 <style scoped lang="scss">
-// @import "~/assets/styles/partials";
-
 .section-with-background {
     background-color: $color-white;
     margin-top: 0;
@@ -74,5 +74,4 @@ export default {
     @include apply-font-and-size("heading", 1);
     font-style: normal;
 }
-
 </style>

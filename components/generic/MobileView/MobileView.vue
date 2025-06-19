@@ -1,21 +1,15 @@
 <template>
-    <div v-show="isMobile">
-        <slot />
-    </div>
+  <div v-show="isMobile">
+    <slot />
+  </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
-export default {
-    name: 'MobileView',
-    computed: {
-        ...mapGetters('global/config', [
-            'isMobile'
-        ])
-    }
-}
+<script setup lang="ts">
+import { useConfigStore } from '~/stores/config'
+
+const configStore = useConfigStore()
+const isMobile = computed(() => configStore.isMobile)
 </script>
 
 <style scoped>
-
 </style>

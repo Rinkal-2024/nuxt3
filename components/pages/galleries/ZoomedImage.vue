@@ -1,46 +1,34 @@
 <template>
-    <div class="zommed-image">
-        <!-- <MobileView>
-            <Modal class="mobile-modal" @onClose="onClose">
-                <div class="scroll-container">
-                    <Photo
-                        :image="image"
-                    />
-                </div>
-            </Modal>
-        </MobileView> -->
-        <!-- <DesktopView> -->
-            <Modal @onClose="onClose">
-                <div class="scroll-container">
-                    <Photo
-                        :image="image"
-                    />
-                </div>
-            </Modal>
-        <!-- </DesktopView> -->
+    <div class="zoomed-image">
+        <Modal @onClose="onClose">
+            <div class="scroll-container">
+                <Photo :image="image" />
+            </div>
+        </Modal>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ZoomedImage',
-    props: {
-        image: {
-            type: Object,
-            required: true
-        }
-    },
-    methods: {
-        onClose() {
-            this.$emit('onClose')
-        }
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+// Define component props
+const props = defineProps({
+    image: {
+        type: Object,
+        required: true
     }
-}
+});
+
+// Define the event emitter (onClose)
+const emit = defineEmits(['onClose']);
+
+// Method to handle close event
+const onClose = () => {
+    emit('onClose');
+};
 </script>
 
 <style scoped lang="scss">
-// @import "~/assets/styles/partials";
-
 .zommed-image {
     ::v-deep {
         .image {
@@ -49,11 +37,11 @@ export default {
     }
 }
 
-//.scroll-container {
-//    height: 100%;
-//    width: 100%;
-//    overflow: scroll;
-//}
+// .scroll-container {
+//     height: 100%;
+//     width: 100%;
+//     overflow: scroll;
+// }
 
 .mobile-modal {
     ::v-deep {
@@ -80,7 +68,5 @@ export default {
             width: 80vw;
         }
     }
-
 }
-
 </style>

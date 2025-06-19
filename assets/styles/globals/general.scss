@@ -1,4 +1,8 @@
-//@import "../partials";
+@use '../partials/config/texts.scss' as *;
+@use '../partials/mixins/responsiveness.scss' as *;
+@use '../partials/config/colors.scss' as *;
+@use '../partials/mixins/fontsAndTexts.scss' as *;
+
 
 * {
   box-sizing: border-box;
@@ -115,7 +119,7 @@ figure {
 
 /**
  BUGFIX: When clicking into the search bar, the view zooms into the text area,
- and it’s hard to get back to the full site – or even the search bar.
+ and it's hard to get back to the full site – or even the search bar.
  Can it work so the user can tap & type into the search bar without
  it changing the view/zoom of the site?
  */

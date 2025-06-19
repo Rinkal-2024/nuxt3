@@ -1,21 +1,13 @@
 <template>
-    <div v-show="!isMobile">
-        <slot />
-    </div>
+  <div v-show="!isMobile">
+    <slot />
+  </div>
 </template>
 
-<script>
-import { mapGetters } from 'vuex'
-export default {
-    name: 'DesktopView',
-    computed: {
-        ...mapGetters('global/config', [
-            'isMobile'
-        ])
-    }
-}
+<script setup lang="ts">
+const { isMobile } = useState<boolean>('global/config/isMobile')
 </script>
 
 <style scoped>
-
+/* No styles currently */
 </style>

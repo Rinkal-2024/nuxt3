@@ -1,25 +1,29 @@
+@use '../partials/mixins/responsiveness.scss' as *;
+@use '../partials/config/colors.scss' as *;
+@use '../partials/mixins/fontsAndTexts.scss' as *;
+
 .slider {
     width: 100%;
     max-width: 1440px;
     margin-right: auto;
     margin-left: auto;
+    position: relative;
+    overflow: hidden;
     height: 20rem !important;
     @include medium-and-large-screens {
         height: 33rem !important;
     }
-    position: relative;
-    overflow: hidden;
 }
 
 .slide {
-     width: 100%;
+    width: 100%;
     max-width: 1440px;
+    position: absolute;
+    transition: all 0.5s;
     height: 20rem !important;
     @include medium-and-large-screens {
         height: 33rem !important;
     }
-    position: absolute;
-    transition: all 0.5s;
 }
 
 .slider-btn {
@@ -39,16 +43,18 @@
 
     svg {
         margin-top: -0.29375rem;
+        fill: $color-white;
+        filter: drop-shadow(2px 2px 2px #000);
         @include medium-and-large-screens {
             margin-top: -0.235rem;
         }
-        fill: $color-white;
-        filter: drop-shadow( 2px 2px 2px #000);
     }
 }
+
 .slider-btn:active {
     transform: scale(1.1);
 }
+
 .slider-btn-prev {
     top: 45%;
     left: 1rem;
@@ -62,9 +68,6 @@
     right: 1rem;
     @include medium-and-large-screens {
         right: 2rem;
-    }
-    img {
-
     }
 }
 
@@ -80,8 +83,8 @@
     padding: 0.5rem;
 
     &:hover {
-            text-decoration: underline !important;
-        }
+        text-decoration: underline !important;
+    }
 
     a, h2, h3 {
         color: $color-white;
