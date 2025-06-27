@@ -1,0 +1,12 @@
+@use 'partials/mixins/' as mixins;
+// @use './partials.scss' as *;
+// @use "./globals/fonts";
+// @use "./globals/general";
+// @use "./globals/thirdParty";
+// @use "./globals/utils";
+// @use "./globals/common";
+// @use "./partials/config/texts.scss";
+
+.button-global {
+  @include mixins.button;
+}

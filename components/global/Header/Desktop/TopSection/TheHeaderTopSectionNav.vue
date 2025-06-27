@@ -1,87 +1,83 @@
 <template>
-  <nav class="nav">
-    <div class="support-and-subscribe">
-      <span class="link support">Support</span>
-      <a
-        href="https://www.simplecirc.com/subscribe/inside-weddings"
-        class="link"
-        target="_blank"
-      >
-        <span class="link">Subscribe</span>
-      </a>
-    </div>
-    <div class="support-and-subscribe">
-      <a
-        href="https://www.simplecirc.com/shop/inside-weddings"
-        class="link"
-        target="_blank"
-      >
-        <span class="link order_iw_cl">ORDER IW</span>
-      </a>
-      <NuxtLink to="/advertise"><span class="link">ADVERTISE</span></NuxtLink>
-    </div>
-  </nav>
+    <nav class="nav">
+        <div class="support-and-subscribe">
+            <span class="link support">Support</span>
+            <a href="https://www.simplecirc.com/subscribe/inside-weddings" class="link" target="_blank"><span class="link">Subscribe</span></a>
+        </div>
+        <div class="support-and-subscribe">
+            <a href="https://www.simplecirc.com/shop/inside-weddings" class="link" target="_blank"><span class="link order_iw_cl">ORDER IW</span></a>
+            <NuxtLink to="/advertise"><span class="link">ADVERTISE</span></NuxtLink>  
+        </div>
+        <!-- <div class="support-and-subscribe">
+            <span class="link support">Support</span>
+            <span class="link subscribe">Subscribe</span>  
+        </div>
+        <div class="level">
+            <Link to="/work-with-us">Are you a business?</Link>
+        </div> -->
+    </nav>
 </template>
 
-<script setup>
-const openNewsletterPopup = () => {
-  // In Nuxt 3, you use the Pinia store or composables instead of `this.$store`
-  // Example if you're using Pinia:
-  // const globalStore = useGlobalStore()
-  // globalStore.openNewsletterModal()
+<script>
 
-  // Placeholder for real implementation
-  console.log('Open newsletter popup')
+export default {
+    name: 'TheHeaderTopSectionNav',
+    methods: {
+        openNewsletterPopup () {
+            this.$store.dispatch('global/config/openNewsletterModal')
+        }
+    }
 }
 </script>
 
 <style scoped lang="scss">
-@use '../../../../../assets/styles/partials.scss' as *;
-@use '../../../../../assets/styles/partials/mixins.scss' as *;
+// @import "~/assets/styles/partials";
 
 .separator {
-  @include apply-font-and-size("link", 6);
+    @include apply-font-and-size("link", 6);
 }
 
 .nav {
-  line-height: 0;
+    line-height: 0;
 }
 
 .link {
-  font-weight: 100;
-  color: $color-black;
-  text-decoration: none;
-  cursor: pointer;
+    font-weight: 100;
+    color: $color-black;
+    text-decoration: none;
+    cursor: pointer;
 
-  &:hover {
-    text-decoration: underline;
-  }
+    &:hover {
+        text-decoration: underline;
+    }
 
-  @include apply-font-and-size("link", 6);
-  text-transform: uppercase;
+    @include apply-font-and-size("link", 6);
+    text-transform: uppercase;
 }
 
 .support-and-subscribe {
-  display: flex;
+    display: flex;
 
-  .support {
-    margin-right: 0;
+    .support {
+        margin-right: 0;
 
-    &:after {
-      display: inline-block;
-      padding: 0 0.2rem;
-      content: "|";
+        &:after {
+            display: inline-block;
+            padding: 0 0.2rem;
+            content: "|";
+        }
     }
-  }
 
-  .order_iw_cl {
-    margin-right: 0;
+    .order_iw_cl {
+        margin-right: 0;
 
-    &:after {
-      display: inline-block;
-      padding: 0 0.2rem;
-      content: "|";
+        &:after {
+            display: inline-block;
+            padding: 0 0.2rem;
+            content: "|";
+        }
     }
-  }
+
+
 }
 </style>

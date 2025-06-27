@@ -1,32 +1,19 @@
-export const state = () => ({
-    data: []
+// store/home/honeymoonsWidget.js
+import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
+
+export const useHomeHoneymoonsWidgetStore = defineStore('homeHoneymoonsWidget', () => {
+  const data = ref({})
+
+  // You can add getters here, e.g.:
+  // const someGetter = computed(() => ...)
+
+  function hydrate(newData) {
+    data.value = newData
+  }
+
+  return {
+    data,
+    hydrate
+  }
 })
-
-export const getters = {
-    items: state => {
-        return state.data
-            .map(item => ({
-                id: item.id,
-                title: item.title,
-                subtitle: item.subtitle,
-                image: item.main_image.image,
-                linkTo: item.slug
-            }))
-    }
-}
-
-export const mutations = {
-
-    SET_DATA (state, data) {
-        state.data = data
-    }
-
-}
-
-export const actions = {
-
-    hydrate({ commit }, data) {
-        commit('SET_DATA', data)
-    }
-
-}

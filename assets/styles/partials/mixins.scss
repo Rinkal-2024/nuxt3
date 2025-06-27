@@ -1,4 +1,4 @@
-@use "./mixins/responsiveness.scss" as *;
-@use "./mixins/linksAndButtons.scss" as *;
-@use "./mixins/fontsAndTexts.scss" as *;
-@use "./mixins/other.scss" as *;
+@forward "./mixins/responsiveness.scss" ;
+@forward "./mixins/linksAndButtons.scss" ;
+@forward "./mixins/fontsAndTexts.scss" ;
+@forward "./mixins/other.scss" ;

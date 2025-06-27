@@ -1,0 +1,35 @@
+@use "../config";
+@use "../config/texts.scss" as *;
+@use "../config/responsiveness.scss" as *;
+
+
+@mixin small-screens {
+    @media (max-width: #{$small-screen-min-width}) {
+        @content;
+    }
+}
+
+@mixin small-and-medium-screens {
+    @media (max-width: #{$small-screen-max-width}) {
+        @content;
+    }
+}
+
+@mixin medium-and-large-screens {
+    @media (min-width: #{$medium-screen-min-width}) {
+        @content;
+    }
+}
+
+@mixin large-screens {
+    @media (min-width: #{$large-screen-min-width}) {
+        @content;
+    }
+}
+
+@mixin hidden-for-small-and-visible-for-medium-and-large-screens {
+    display: none;
+    @include medium-and-large-screens {
+        display: inherit;
+    }
+}

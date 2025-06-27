@@ -38,6 +38,8 @@
 
 <script setup lang="ts">
 import { defineProps } from 'vue'
+import PageLayoutMargin from '../PageLayoutMargin/PageLayoutMargin.vue';
+import PageSectionBody from './PageSectionBody.vue';
 
 const props = defineProps({
   title: {

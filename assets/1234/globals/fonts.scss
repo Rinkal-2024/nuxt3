@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "Didot LT Std";
+  font-display: block;
+  src: url("/fonts/O-DidotLTStd-Regular.woff2") format("woff2"),
+  url("/fonts/O-DidotLTStd-Regular.woff") format("woff"),
+  url("/fonts/O-DidotLTStd-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  font-display: block;
+  src:
+  url("/fonts/O-Nunito-Regular.woff2") format("woff2"),
+  url("/fonts/O-Nunito-Regular.woff") format("woff"),
+  url( "/fonts/O-Nunito-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

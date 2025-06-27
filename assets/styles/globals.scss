@@ -1,17 +1,15 @@
-@use './partials/config/colors.scss' as *;
-@use './partials/config/dimensions.scss' as *;
-@use './partials/config/others.scss' as *;
-@use './partials/config/responsiveness.scss' as *;
-@use './partials/config/texts.scss' as *;
-@use './partials/config/zIndexes.scss' as *;
-@use './partials.scss' as *;
-
-@use './partials/mixins/responsiveness.scss' as *;
-@use './partials/mixins/fontsAndTexts.scss' as *;
-@use './partials/mixins/linksAndButtons.scss' as *;
-@use './partials/mixins/other.scss' as *;
-
-@use "./globals/fonts" as *;
-@use "./globals/thirdParty" as *;
-
+@use 'partials/mixins/' as mixins;
+@use 'partials/config/colors' as colors;
+@use 'partials/config' as *;
+@use './globals/general.scss' as *;
 @use './styles.amp.scss' as *;
+// @use './globals/utils.scss' as *;
+// @use './globals/fonts.scss' as *;
+// @use './globals/common.scss' as *;
+
+// @use './partials.scss' as *;
+// @use "./partials/config/texts.scss";
+
+.button-global {
+  @include mixins.button;
+}

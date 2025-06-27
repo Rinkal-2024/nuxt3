@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-import AdUnit from '~/components/path/to/AdUnit.vue' // adjust path as needed
+import AdUnit from './AdUnit.vue';
+
 
 const props = defineProps({
   adSlot: {

@@ -1,0 +1,46 @@
+@use "../config";
+@use "./responsiveness";
+
+@mixin apply-box-shadow {
+  box-shadow: 2px 4px 15px -10px $box-shadow-color;
+}
+
+@mixin apply-header-section {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+
+  padding: 1rem 0;
+  border: solid $border-width $color-grey;
+  border-left: none;
+  border-right: none;
+}
+
+@mixin apply-zero-padding-and-margin-for-first-and-last-child {
+  &:first-child {
+    padding-left: 0;
+    margin-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+    margin-right: 0;
+  }
+}
+
+@mixin apply-svg-color($color) {
+  circle,
+  line,
+  rect {
+    stroke: $color;
+  }
+  path {
+    fill: $color;
+  }
+}
+
+@mixin apply-svg-size($size) {
+  svg {
+    width: $size;
+    height: $size;
+  }
+}

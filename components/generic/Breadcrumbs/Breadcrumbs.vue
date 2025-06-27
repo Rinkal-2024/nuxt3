@@ -157,41 +157,41 @@ export default {
 <style scoped lang="scss">
 // @import "~/assets/styles/partials";
 
-ul {
-  list-style: none;
-  padding-left: 0;
-  line-height: 1.5;
-}
+// ul {
+//   list-style: none;
+//   padding-left: 0;
+//   line-height: 1.5;
+// }
 
-li {
-  display: inline;
-  @include apply-font-and-size('label', 4);
-  font-size: 0.6rem;
+// li {
+//   display: inline;
+//   @include apply-font-and-size('label', 4);
+//   font-size: 0.6rem;
 
-  @include small-and-medium-screens {
-    font-size: 0.8rem;
-  }
+//   @include small-and-medium-screens {
+//     font-size: 0.8rem;
+//   }
 
-  &:not(:last-child)::after {
-    content: ' > ';
-    display: inline;
-    font-size: 0.9em;
-    color: #aaa;
-    padding: 0 0.0725em 0 0.15em;
-  }
+//   &:not(:last-child)::after {
+//     content: ' > ';
+//     display: inline;
+//     font-size: 0.9em;
+//     color: #aaa;
+//     padding: 0 0.0725em 0 0.15em;
+//   }
 
-  a {
-    color: $primary-text-color;
-    text-decoration: none;
+//   a {
+//     color: $primary-text-color;
+//     text-decoration: none;
 
-    &:hover {
-      text-decoration: underline;
-    }
+//     &:hover {
+//       text-decoration: underline;
+//     }
 
-    &.nuxt-link-exact-active.nuxt-link-active {
-      color: $color-darker-grey;
-      pointer-events: none;
-    }
-  }
-}
+//     &.nuxt-link-exact-active.nuxt-link-active {
+//       color: $color-darker-grey;
+//       pointer-events: none;
+//     }
+//   }
+// }
 </style>
