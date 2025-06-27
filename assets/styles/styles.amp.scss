@@ -1,11 +1,6 @@
-
-@use './partials/config/colors.scss' as *;
-@use './partials/mixins/fontsAndTexts.scss' as *;
-@use './partials//mixins/other.scss' as *;
-@use './partials/config/texts.scss' as *;
-@use './partials/config/dimensions.scss' as *;
-@use './partials/config/zIndexes.scss' as *;
-// @use './partials/mixins/linksAndButtons.scss' as *;
+@use "./partials/config/colors" as *;
+@use "./partials/mixins/" as *;
+@use "./partials/config/" as *;
 
 .__amp {
     background-color: $color-darker-white;
@@ -425,7 +420,7 @@
         background-color: $color-black;
         z-index: $footer-z-index;
         //margin-top: 1.5rem;
-        // border-top: $border-width solid $color-white;
+        border-top: $border-width solid $color-white;
 
         .copyright-description {
             display: flex;
@@ -895,7 +890,7 @@
 
             & + & {
                 padding-top: 2rem;
-                // border-top: $border-width solid $color-grey;
+                border-top: $border-width solid $color-grey;
             }
         }
 
@@ -2029,8 +2024,8 @@
             text-align: left;
             margin-top: -2rem;
             padding: 1.5rem 0;
-            // border-top: $border-width solid $color-grey;
-            // border-bottom: $border-width solid $color-grey;
+            border-top: $border-width solid $color-grey;
+            border-bottom: $border-width solid $color-grey;
 
 
             .item {
@@ -2690,7 +2685,7 @@
         margin: 0;
         width: 100%;
         border: none;
-        // border-top: $border-width solid $color-grey;
+        border-top: $border-width solid $color-grey;
     }
 
     .get-to-know, .locations-we-love {

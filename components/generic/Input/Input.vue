@@ -7,7 +7,7 @@
     :id="id"
     :name="name"
     :disabled="disabled"
-    v-model="modelValue"
+    v-model="internalValue"
     @blur="emitBlur"
   />
 </template>
@@ -62,10 +62,6 @@ function emitBlur() {
 // @import "~/assets/styles/partials";
 
 .input {
-  @include apply-font-and-size("label", 4);
-  @include medium-and-large-screens {
-    @include apply-font-and-size("label", 6);
-  }
   font-weight: 100;
   border: $input-border-size solid $input-border-color;
   border-radius: $input-border-radius;
@@ -73,9 +69,14 @@ function emitBlur() {
   color: $input-text-color;
   padding: 0 0.8rem;
   height: calc(2.5rem - #{($input-border-size * 2)});
-  box-shadow: inset 0 0 0.1rem $color-darker-white,
-    0 0 0.1rem $color-darker-white;
+  box-shadow: inset 0 0 0.1rem $color-darker-white, 0 0 0.1rem $color-darker-white;
   letter-spacing: 0.1rem;
+
+  @include apply-font-and-size("label", 4);
+
+  @include medium-and-large-screens {
+    @include apply-font-and-size("label", 6);
+  }
 
   &.with-error {
     border: solid 1px $error-border-color;
@@ -91,3 +92,4 @@ function emitBlur() {
   }
 }
 </style>
+

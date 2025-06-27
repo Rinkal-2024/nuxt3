@@ -1,19 +1,11 @@
-<!-- components/TheHeaderTopSectionLogo.vue -->
 <template>
-  <div class="logo">
-    <NuxtLink to="/" aria-label="Homepage" class="logo__a">
-      <!-- SVG logo unchanged -->
-      <svg
-        width="470px"
-        height="40px"
-        viewBox="0 0 470 40"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
-      >
-        <!-- OMITTED: Your SVG content remains here exactly as is -->
-        <!-- (No need to change it unless you want to optimize the file size) -->
-      </svg>
-      <!-- <svg width="470px" height="40px" viewBox="0 0 470 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <div class="logo">
+        <NuxtLink
+            to="/"
+            aria-label="Homepage"
+            class="logo__a"
+        >
+            <svg width="470px" height="40px" viewBox="0 0 470 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g id="Desktop" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <g id="IW_Homepage_1.1" transform="translate(-63.000000, -40.000000)" fill="#000000" fill-rule="nonzero">
                         <g id="Header" transform="translate(63.000000, 40.000000)">
@@ -36,35 +28,38 @@
                         </g>
                     </g>
                 </g>
-            </svg> -->
-    </NuxtLink>
-  </div>
+            </svg>
+        </NuxtLink>
+    </div>
 </template>
 
-<script setup>
-// Nuxt 3 uses `<script setup>`
-// No special logic required for this component
+<script>
+export default {
+    name: 'TheHeaderTopSectionLogo'
+}
 </script>
 
 <style scoped lang="scss">
+
 .logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .logo__a {
-  display: inline-block;
-  max-height: 40px;
-  width: inherit;
-  max-width: 470px;
-
-  > svg {
-    height: auto;
-    max-height: inherit;
+    display: inline-block;
+    max-height: 40px;
     width: inherit;
-    max-width: inherit;
-  }
+    max-width: 470px;
+
+    > svg {
+        height: auto;
+        max-height: inherit;
+        width: inherit;
+        max-width: inherit;
+    }
 }
+
 </style>

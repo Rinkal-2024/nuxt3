@@ -70,31 +70,31 @@ export default {
 
 <style scoped lang="scss">
 
-// .social-links {
-//     display: flex;
-//     justify-content: center;
-//     margin: 0;
-//     padding: 0;
-//     list-style: none;
-//     .social-links__item {
+.social-links {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    .social-links__item {
         
-//         margin: 0 0.15rem;
-//         white-space: nowrap;
+        margin: 0 0.15rem;
+        white-space: nowrap;
 
-//         a {
-//             display: flex;
-//         }
+        a {
+            display: flex;
+        }
 
-//         padding: 10px ; /* Increase the padding to expand the tap target */
-//         min-width: 48px; /* Set a minimum width for the tap target */
-//         min-height: 48px; /* Set a minimum height for the tap target */   
-//         @include medium-and-large-screens {
-//             @include apply-zero-padding-and-margin-for-first-and-last-child;
-//             padding: 0 ;
-//             min-width: 25px;
-//             min-height: 25px;
-//         }
-//     }
+        padding: 10px ; /* Increase the padding to expand the tap target */
+        min-width: 48px; /* Set a minimum width for the tap target */
+        min-height: 48px; /* Set a minimum height for the tap target */   
+        @include medium-and-large-screens {
+            @include apply-zero-padding-and-margin-for-first-and-last-child;
+            padding: 0 ;
+            min-width: 25px;
+            min-height: 25px;
+        }
+    }
       
-// }
+}
 </style>

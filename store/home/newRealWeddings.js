@@ -1,33 +1,33 @@
-export const state = () => ({
-    data: []
+// store/home/newRealWeddings.js
+import { defineStore } from 'pinia'
+import { ref, computed } from 'vue'
+
+export const useHomeNewRealWeddingsStore = defineStore('homeNewRealWeddings', () => {
+  // state
+  const data = ref([])
+
+  // getters
+  const items = computed(() => {
+    if (!data.value) return []
+
+    return data.value.map(article => ({
+      id: article.id,
+      title: article.title,
+      subtitle: article.subtitle,
+      category: article.event_type_display,
+      image: article.main_image.image,
+      linkTo: article.slug
+    }))
+  })
+
+  // actions
+  function hydrate(newData) {
+    data.value = newData ?? []
+  }
+
+  return {
+    data,
+    items,
+    hydrate
+  }
 })
-
-export const getters = {
-    items: state => {
-        return state.data
-            .map(article => ({
-                id: article.id,
-                title: article.title,
-                subtitle: article.subtitle,
-                category: article.event_type_display,
-                image: article.main_image.image,
-                linkTo: article.slug
-            }))
-    }
-}
-
-export const mutations = {
-
-    SET_DATA (state, data) {
-        state.data = data
-    }
-
-}
-
-export const actions = {
-
-    hydrate({ commit }, data) {
-        commit('SET_DATA', data)
-    }
-
-}

@@ -11,24 +11,24 @@
             <span class="drawer__title"></span>
             <div class="main-navigation-container">
                 <nav class="main-navigation">
-                    <Link
+                    <NuxtLink
                         :to="{ name: 'about' }"
                         class="link"
                     >
                         About
-                    </Link>
-                    <Link
+                    </NuxtLink>
+                    <NuxtLink
                         :to="{ name: 'advertise' }"
                         class="link"
                     >
                         Advertise
-                    </Link>
-                    <Link
+                    </NuxtLink>
+                    <NuxtLink
                         :to="{ name: 'contact' }"
                         class="link"
                     >
                         Contact
-                    </Link>
+                    </NuxtLink>
                     <LinkRaw
                         href="https://simplecirc.com/subscribe/inside-weddings"
                         class="link"
@@ -40,18 +40,18 @@
                     >
                         Subscribe to Newsletter
                     </span>
-                    <Link
+                    <NuxtLink
                         :to="{ name: 'wedding-submit' }"
                         class="link"
                     >
                         Submit a Wedding
-                    </Link>
-                    <Link
+                    </NuxtLink>
+                    <NuxtLink
                         :to="{ name: 'work-with-us' }"
                         class="link"
                     >
                         Are You a Business?
-                    </Link>
+                    </NuxtLink>
                     <span
                         class="link support"
                     >
@@ -65,7 +65,12 @@
 </template>
 
 <script>
-export default {
+import SocialLinks from '~/components/shared/SocialLinks/SocialLinks.vue';
+import MainNavigation from '../MainNavigation.vue';
+import NewsCategoriesNavigation from '../NewsCategoriesNavigation.vue';
+import LinkRaw from '~/components/generic/LinkRaw/LinkRaw.vue';
+
+export default {  
     name: 'TheHeaderMobileSidebarDrawer',
     props: {
         open: {

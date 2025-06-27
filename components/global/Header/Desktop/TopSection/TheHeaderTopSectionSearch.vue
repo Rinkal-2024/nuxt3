@@ -7,6 +7,7 @@
 <script setup>
 import { ref, nextTick } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import SearchInputWithButton from '~/components/shared/SearchInputWithButton.vue'
 
 const query = ref('')
 const router = useRouter()

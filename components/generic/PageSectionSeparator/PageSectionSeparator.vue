@@ -13,11 +13,11 @@
 <style scoped lang="scss">
 // @import "~/assets/styles/partials";
 
-.page-section-separator {
-  margin: 2rem 0 0 0;
+// .page-section-separator {
+//   margin: 2rem 0 0 0;
 
-  @include medium-and-large-screens {
-    margin: 3rem 0 0 0;
-  }
-}
+//   @include medium-and-large-screens {
+//     margin: 3rem 0 0 0;
+//   }
+// }
 </style>

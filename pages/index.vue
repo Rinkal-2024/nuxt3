@@ -1,56 +1,140 @@
 <script setup>
-import { useAsyncData, useHead, useNuxtApp, useRoute } from '#app'
-import { useStore } from '@/store/config' 
-import { getMetaUri, requestData } from '~/utils/api'
-import { getImageSrcSet, getImageSizes } from '~/utils/imgSrcSet'
+import { defineAsyncComponent, computed } from "vue";
 
-// Store and app context
-const store = useStore()
-const route = useRoute()
-const nuxtApp = useNuxtApp()
+import { useAsyncData, useRuntimeConfig, useHead } from "#app";
 
-// Fetch data
-const { data: homepageData } = await useAsyncData('home', async () => {
-  const [meta, data] = await requestData(nuxtApp.$http, getMetaUri(nuxtApp.ssrContext?.req, route), 'home/?fields=*')
-  await store.api.home.hydrate({ meta, data })
-  return { meta, data }
-})
+import { useApiHomeStore } from "~/store/api/home";
 
-// Computed for carousel
-const homePageCarouselItems = computed(() => store.home.newsCarousel.items)
+import { useHomeNewsCarouselStore } from "~/store/home/newsCarousel";
 
-// SEO and preload main image
-const headData = store.api.home.head
-const mainImage = homePageCarouselItems.value?.[0]?.image
+import { getImageSrcSet, getImageSizes } from "~/utils/imgSrcSet";
 
-useHead({
-  ...headData,
-  script: [
-    ...(headData.script || []),
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify(store.api.home.structuredData)
+import HomePageNewsCarousel from "~/components/pages/home/HomePageNewsCarousel.vue";
+import CarouselItem from "~/components/generic/Carousel/CarouselItem.vue";
+import HomePageLatestWeddingNews from "~/components/pages/home/HomePageLatestWeddingNews/HomePageLatestWeddingNews.vue";
+import { useLatestNewsStore } from '~/store/home/latestNews'
+
+// Lazy-loaded components
+
+const LazyHomePageWeddingsCarousel = defineAsyncComponent(() =>
+  import("~/components/pages/home/HomePageWeddingsCarousel.vue")
+);
+
+const LazyHomePageNewRealWeddings = defineAsyncComponent(() =>
+  import("~/components/pages/home/HomePageNewRealWeddings.vue")
+);
+
+const LazyHomePageWeddingInspiration = defineAsyncComponent(() =>
+  import("~/components/pages/home/HomePageWeddingInspiration.vue")
+);
+
+const LazyBuildYourWeddingTeam = defineAsyncComponent(() =>
+  import(
+    "~/components/shared/sections/BuildYourWeddingTeam/BuildYourWeddingTeam.vue"
+  )
+);
+
+const LazyGetToKnowSection = defineAsyncComponent(() =>
+  import("~/components/shared/sections/GetToKnow/GetToKnowSection.vue")
+);
+
+const LazyLocationsWeLove = defineAsyncComponent(() =>
+  import("~/components/shared/sections/LocationsWeLove/LocationsWeLove.vue")
+);
+
+const LazyHomePageHoneymoonsDestination = defineAsyncComponent(() =>
+  import("~/components/pages/home/HomePageHoneymoonsDestination.vue")
+);
+
+const LazyPageSectionSeparator = defineAsyncComponent(() =>
+  import("~/components/generic/PageSectionSeparator/PageSectionSeparator.vue")
+);
+
+const LazyHomePageWebsiteDescription = defineAsyncComponent(() =>
+  import("~/components/pages/home/HomePageWebsiteDescription.vue")
+);
+
+const config = useRuntimeConfig();
+
+const apiStore = useApiHomeStore();
+
+const newsCarouselStore = useHomeNewsCarouselStore();
+const latestNewsStore = useLatestNewsStore()
+
+const { data: fetchedData, error } = await useAsyncData(
+  "homeData",
+  async () => {
+    const response = await fetch(`${config.public.baseUrl}home/?fields=*`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch home data");
     }
-  ],
-  link: mainImage
-    ? [
-        {
-          rel: 'preload',
-          fetchpriority: 'high',
-          as: 'image',
-          imagesrcset: getImageSrcSet(mainImage),
-          imagesizes: getImageSizes(100)
-        },
-        ...(headData.link || [])
-      ]
-    : headData.link
-})
+
+    return response.json();
+  }
+);
+
+if (fetchedData.value) {
+  await apiStore.hydrate({
+    meta: null,
+
+    data: {
+      items: fetchedData.value,
+    },
+  });
+  if (fetchedData.value) {
+    console.log("HOMe page" , fetchedData.value)
+  }
+  newsCarouselStore.hydrate(fetchedData.value.items?.[0]?.news_carousel || []);
+  latestNewsStore.hydrate(fetchedData.value.items?.[0]?.latest_news || []);
+  
+}
+const homePageCarouselItems = computed(() => newsCarouselStore.items);
+const head = apiStore.head || {};
+
+head.script ||= [];
+
+head.script.push({
+  json: apiStore.structuredData,
+  type: "application/ld+json",
+});
+
+const mainImage = newsCarouselStore.items?.[0]?.image;
+
+if (mainImage) {
+  head.link ||= [];
+
+  head.link.unshift({
+    rel: "preload",
+
+    fetchpriority: "high",
+
+    as: "image",
+
+    imagesrcset: getImageSrcSet(mainImage),
+
+    imagesizes: getImageSizes(100),
+  });
+}
+
+
+// const { data: latestNewsData } = await useAsyncData('latestNewsData', async () => {
+//   const res = await fetch(`${config.public.baseUrl}latest-news/?fields=*`)
+//   if (!res.ok) throw new Error('Failed to fetch latest wedding news')
+//   return await res.json()
+// })
+
+// if (latestNewsData.value) {
+//   latestNewsStore.hydrate(latestNewsData.value.items || [])
+// }
+
+useHead(head);
 </script>
 
 <template>
   <div>
     <ClientOnly>
-      <HomePageNewsCarousel v-if="!$isAMP" />
+      <HomePageNewsCarousel />
     </ClientOnly>
 
     <template v-if="$isAMP">
@@ -90,38 +174,6 @@ useHead({
         />
       </amp-selector>
     </template>
-
     <HomePageLatestWeddingNews />
-    <HomePageWeddingsCarousel />
-
-    <Suspense>
-      <LazyHomePageNewRealWeddings />
-    </Suspense>
-
-    <LazyPageSectionSeparator />
-    <Suspense>
-      <LazyHomePageWeddingInspiration />
-    </Suspense>
-
-    <ClientOnly>
-      <BuildYourWeddingTeam v-if="!$isAMP" />
-    </ClientOnly>
-
-    <Suspense>
-      <LazyGetToKnowSection />
-    </Suspense>
-
-    <LazyPageSectionSeparator />
-    <Suspense>
-      <LazyLocationsWeLove />
-    </Suspense>
-
-    <LazyPageSectionSeparator />
-    <Suspense>
-      <LazyHomePageHoneymoonsDestination />
-    </Suspense>
-
-    <LazyPageSectionSeparator />
-    <LazyHomePageWebsiteDescription />
   </div>
 </template>

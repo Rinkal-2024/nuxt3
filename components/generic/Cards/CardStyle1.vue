@@ -3,7 +3,7 @@
     class="card card-style-1"
     :class="{ 'with-hover-call-to-action': withHoverCallToAction }"
   >
-    <Link :to="linkTo" rel="nofollow" class="js-card-style-1-link" withoutStyles>
+    <NuxtLink :to="linkTo" rel="nofollow" class="js-card-style-1-link" withoutStyles>
       <Photo
         v-if="!$isAMP"
         :image="image"
@@ -17,16 +17,16 @@
         :image="image"
         class="card__image"
       />
-    </Link>
+    </NuxtLink>
 
     <div class="card__content">
       <h2 class="content__title">
-        <Link :to="linkTo" class="js-card-style-1-link-title" withoutStyles>
+        <NuxtLink :to="linkTo" class="js-card-style-1-link-title" withoutStyles>
           {{ title }}
-        </Link>
+        </NuxtLink>
       </h2>
 
-      <Link
+      <NuxtLink
         v-if="category"
         :to="categoryLinkTo"
         class="js-card-style-1-link-category"
@@ -35,7 +35,7 @@
         <Category class="content__category">
           {{ category }}
         </Category>
-      </Link>
+      </NuxtLink>
 
       <p v-if="description">
         <span class="content__description">
@@ -43,7 +43,7 @@
         </span>
       </p>
 
-      <Link
+      <NuxtLink
         v-if="!withoutCallToAction"
         :to="linkTo"
         rel="nofollow"
@@ -61,7 +61,7 @@
           <span class="link__desktop">{{ linkTitle }}</span>
           <Button class="link__mobile">{{ linkTitle }}</Button>
         </template>
-      </Link>
+      </NuxtLink>
     </div>
   </div>
 </template>

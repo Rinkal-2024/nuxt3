@@ -205,10 +205,8 @@ export default {
     }
 }
 
-.breadcrumbs {
-
-    ::v-deep li {
-        line-height: 2rem;
-    }
+.breadcrumbs :deep(li) {
+  line-height: 2rem;
 }
+
 </style>
