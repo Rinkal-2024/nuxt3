@@ -1,20 +1,20 @@
 <script setup>
 import { defineAsyncComponent, computed } from "vue";
-
 import { useAsyncData, useRuntimeConfig, useHead } from "#app";
-
 import { useApiHomeStore } from "~/store/api/home";
-
 import { useHomeNewsCarouselStore } from "~/store/home/newsCarousel";
-
 import { getImageSrcSet, getImageSizes } from "~/utils/imgSrcSet";
-
 import HomePageNewsCarousel from "~/components/pages/home/HomePageNewsCarousel.vue";
 import CarouselItem from "~/components/generic/Carousel/CarouselItem.vue";
 import HomePageLatestWeddingNews from "~/components/pages/home/HomePageLatestWeddingNews/HomePageLatestWeddingNews.vue";
 import { useLatestNewsStore } from '~/store/home/latestNews'
+import HomePageWeddingsCarousel from "~/components/pages/home/HomePageWeddingsCarousel.vue";
+import { useWeddingsCarouselStore } from "~/store/home/weddingsCarousel";
+import { useHomeNewRealWeddingsStore } from "~/store/home/newRealWeddings";
+import { useHomeWeddingInspirationStore } from "~/store/home/weddingInspiration";
+import BuildYourWeddingTeam from "~/components/shared/sections/BuildYourWeddingTeam/BuildYourWeddingTeam.vue";
+import { useBuildYourWeddingTeamStore } from "~/store/shared/buildYourWeddingTeam";
 
-// Lazy-loaded components
 
 const LazyHomePageWeddingsCarousel = defineAsyncComponent(() =>
   import("~/components/pages/home/HomePageWeddingsCarousel.vue")
@@ -55,12 +55,13 @@ const LazyHomePageWebsiteDescription = defineAsyncComponent(() =>
 );
 
 const config = useRuntimeConfig();
-
 const apiStore = useApiHomeStore();
-
 const newsCarouselStore = useHomeNewsCarouselStore();
 const latestNewsStore = useLatestNewsStore()
-
+const weddingsCarouselStore = useWeddingsCarouselStore()
+const newRealWeddingsStore = useHomeNewRealWeddingsStore()
+const newWeddingInspirationStore = useHomeWeddingInspirationStore();
+const newBuildYourWeddingTeamStore = useBuildYourWeddingTeamStore();
 const { data: fetchedData, error } = await useAsyncData(
   "homeData",
   async () => {
@@ -83,13 +84,17 @@ if (fetchedData.value) {
     },
   });
   if (fetchedData.value) {
-    console.log("HOMe page" , fetchedData.value)
+    console.log("Home page" , fetchedData.value)
   }
   newsCarouselStore.hydrate(fetchedData.value.items?.[0]?.news_carousel || []);
   latestNewsStore.hydrate(fetchedData.value.items?.[0]?.latest_news || []);
-  
+  weddingsCarouselStore.hydrate(fetchedData.value.items?.[0]?.weddings_carousel || [])
+  newRealWeddingsStore.hydrate(fetchedData.value.items?.[0]?.new_weddings || [])
+  newWeddingInspirationStore.hydrate(fetchedData.value.items?.[0]?.gallery_categories || []);
+  newBuildYourWeddingTeamStore.hydrate(fetchedData.value.items?.[0]?.vendor_categories || []);
 }
 const homePageCarouselItems = computed(() => newsCarouselStore.items);
+console.log("homePageCarouselItems", homePageCarouselItems.value);
 const head = apiStore.head || {};
 
 head.script ||= [];
@@ -103,16 +108,11 @@ const mainImage = newsCarouselStore.items?.[0]?.image;
 
 if (mainImage) {
   head.link ||= [];
-
   head.link.unshift({
     rel: "preload",
-
     fetchpriority: "high",
-
     as: "image",
-
     imagesrcset: getImageSrcSet(mainImage),
-
     imagesizes: getImageSizes(100),
   });
 }
@@ -175,5 +175,19 @@ useHead(head);
       </amp-selector>
     </template>
     <HomePageLatestWeddingNews />
+    <HomePageWeddingsCarousel />
+    
+    <Suspense>
+      <LazyHomePageNewRealWeddings />
+    </Suspense>
+
+    <LazyPageSectionSeparator />
+    <Suspense>
+      <LazyHomePageWeddingInspiration />
+    </Suspense>
+
+      <ClientOnly>
+      <BuildYourWeddingTeam v-if="!$isAMP" />
+    </ClientOnly>
   </div>
 </template>

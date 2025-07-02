@@ -1,8 +1,8 @@
 <template>
   <section class="section">
-    <Link v-if="title && linkTo" :to="linkTo">
+    <NuxtLink v-if="title && typeof linkTo === 'string'" :to="linkTo">
       <component :is="titleTag" class="title">{{ title }}</component>
-    </Link>
+    </NuxtLink>
 
     <component v-else-if="title" :is="titleTag" class="title">{{ title }}</component>
 
@@ -41,8 +41,8 @@ const props = defineProps({
     default: false,
   },
   linkTo: {
-    type: [String, Boolean],
-    default: false,
+    type: String,
+    default: undefined,
   },
   titleTag: {
     type: String,

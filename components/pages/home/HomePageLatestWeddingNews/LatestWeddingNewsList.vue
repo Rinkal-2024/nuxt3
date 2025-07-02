@@ -6,25 +6,23 @@
         :key="article.id"
         :title="article.title"
         :subtitle="article.subtitle"
-        :link-to="articleLink(article)"
-        :image="article.image?.url || article.image"
+        :link-to="getArticleLink(article)"
+        :image="article.image?.medium?.url"
+        :alt="article.image?.alt"
       />
     </Cards>
 
-    <Link v-if="withButton" :to="categoryLink" without-styles>
-      <Button class="latest-news__see-more-btn" :name="`More ${categoryName} News`">
-        {{ `More ${categoryName} News` }}
-      </Button>
-    </Link>
+    <Button v-if="withButton" :to="categoryLink" class="latest-news__see-more-btn" replace>
+      More {{ categoryName }} News
+    </Button>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { useRuntimeConfig } from '#app'
-import CardStyle2 from '~/components/generic/Cards/CardStyle2.vue'
-import Cards from '~/components/generic/Cards/Cards.vue'
 import Button from '~/components/generic/Button/Button.vue'
+import Cards from '~/components/generic/Cards/Cards.vue'
+import CardStyle2 from '~/components/generic/Cards/CardStyle2.vue'
 
 const props = defineProps({
   articles: {
@@ -41,22 +39,23 @@ const props = defineProps({
   },
 })
 
-const config = useRuntimeConfig()
-
-const categoryLink = computed(() => {
+const categorySlug = computed(() => {
   const article = props.articles?.[0]
-  const categorySlug = article?.category?.slug || article?.subcategory?.category?.slug
-  return `/news/${categorySlug}/`
+  return article?.category?.slug || article?.subcategory?.category?.slug || ''
 })
 
 const categoryName = computed(() => {
   const article = props.articles?.[0]
-  return article?.category?.name || article?.subcategory?.category?.name
+  return article?.category?.name || article?.subcategory?.category?.name || 'Category'
 })
 
-function articleLink(article) {
-  const categorySlug = article?.category?.slug || article?.subcategory?.category?.slug
-  return `/news/${categorySlug}/${article.linkTo}/${article.id}`
+const categoryLink = computed(() => {
+  return `/news/${categorySlug.value}/`
+})
+
+function getArticleLink(article) {
+  const catSlug = article?.category?.slug || article?.subcategory?.category?.slug || ''
+  return `/news/${catSlug}/${article.linkTo || ''}/${article.id}`
 }
 </script>
 

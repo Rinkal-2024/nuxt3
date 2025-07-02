@@ -15,7 +15,7 @@ export default {
 
 .page-layout-margin {
     width: 100%;
-    max-width: $page-layout-max-width;
+    max-width: $page-layout-max-width;  
     margin-right: auto;
     margin-left: auto;
     padding-left: $mobile-page-layout-horizontal-margin;

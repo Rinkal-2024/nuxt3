@@ -5,8 +5,9 @@
       :key="category.id"
       :data-id="category.id"
       class="news-categories__btn"
-      :class="{ selected: category.id === 1 }"
+      :class="{ selected: category.id === selectedCategoryId }"
       :name="category.name"
+      @click="selectCategory(category.id)"
     >
       {{ category.name }}
     </Button>
@@ -17,14 +18,18 @@
 import Button from '~/components/generic/Button/Button.vue';
 
 const props = defineProps({
-  categories: {
-    type: Array,
-    required: true,
-  },
+  categories: Array,
+  selectedCategoryId: Number,
 })
+const emit = defineEmits(['update:category'])
+
+function selectCategory(id) {
+  emit('update:category', id)
+}
 </script>
 
 <style scoped lang="scss">
+// @import "~/assets/styles/partials";
 
 .news-categories {
     display: flex;
@@ -72,4 +77,5 @@ const props = defineProps({
         }
     }
 }
+
 </style>

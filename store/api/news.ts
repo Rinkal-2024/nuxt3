@@ -1,4 +1,3 @@
-// store/api/news.ts
 import { defineStore } from 'pinia'
 import { generateMeta } from '~/utils/seo'
 import { parseHtmlArray } from '~/utils/html'

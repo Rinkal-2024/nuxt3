@@ -5,12 +5,15 @@
 </template>
 
 <script setup lang="ts">
-// No props or logic needed here, script setup is minimal
+import Cards from '../Cards/Cards.vue';
+
+defineOptions({
+  name: 'TriplePreviewSectionOverflow'
+})
 </script>
 
-<style lang="scss" scoped>
-// If you're using Nuxt 3 + style-resources, make sure your mixins are auto-included
-// @use '~/assets/styles/partials' as *;
+<style scoped lang="scss">
+// @import "~/assets/styles/partials";
 
 .cards {
   @include medium-and-large-screens {
@@ -18,8 +21,7 @@
   }
 }
 
-/* Scoped deep selector syntax for Vue 3 */
-:deep(.card) {
+::v-deep .card {
   margin-top: 1rem;
 
   &:hover {

@@ -11,7 +11,7 @@
       <PageSectionBody
         :description="description"
         :description-as-html="descriptionAsHtml"
-        :link-to="linkTo"
+        :link-to="typeof linkTo === 'string' ? linkTo : undefined"
         :subtitle="subtitle"
         :subtitle-tag="subtitleTag"
         :title="title"
@@ -25,7 +25,7 @@
       v-else
       :description="description"
       :description-as-html="descriptionAsHtml"
-      :link-to="linkTo"
+      :link-to="typeof linkTo === 'string' ? linkTo : undefined"
       :subtitle="subtitle"
       :subtitle-tag="subtitleTag"
       :title="title"
@@ -89,50 +89,50 @@ const props = defineProps({
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 // @import "~/assets/styles/partials";
 
 .with-background {
-  background-color: $color-white;
-  padding: 2rem 0;
-  margin: 2rem 0 0 0;
+    background-color: $color-white;
+    padding: 2rem 0;
+    margin: 2rem 0 0 0;
 
-  @include medium-and-large-screens {
-    background-color: $color-darker-white;
-    margin: 3rem 0 0 0;
-  }
+    @include medium-and-large-screens {
+        background-color: $color-darker-white;
+        margin: 3rem 0 0 0;
+    }
 
-  ::v-deep .section {
-    margin-top: 0;
-  }
+    ::v-deep .section {
+        margin-top: 0;
+    }
 }
 
 .without-vertical-margins {
-  margin-top: 0;
-  margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
 
-  ::v-deep {
-    .body {
-      margin-top: 0;
+    ::v-deep {
+        .body {
+            margin-top: 0;
+        }
+
+        .section {
+            margin-top: 0;
+            margin-bottom: 0;
+
+            .body {
+                padding-top: 0;
+            }
+        }
     }
-
-    .section {
-      margin-top: 0;
-      margin-bottom: 0;
-
-      .body {
-        padding-top: 0;
-      }
-    }
-  }
 }
 
 .without-top-body-margin {
-  ::v-deep {
-    .body {
-      padding-top: 0 !important;
-      margin-top: 10px !important;
+    ::v-deep {
+        .body {
+            padding-top: 0 !important;
+            margin-top: 10px !important;
+        }
     }
-  }
 }
 </style>
