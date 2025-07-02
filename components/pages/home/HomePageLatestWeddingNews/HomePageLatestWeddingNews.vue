@@ -1,19 +1,15 @@
 <template>
-  <PageSection
-    :subtitle="subtitle"
-    :title="title"
-    class="latest-news-container"
-  >
+  <PageSection :subtitle="subtitle" :title="title" class="latest-news-container">
     <div class="latest-news">
       <div class="latest-news__news-wrapper">
-        <LatestWeddingNewsCategories :categories="categories" />
-
+        <LatestWeddingNewsCategories
+          :categories="categories"
+          :selectedCategoryId="selectedCategoryId"
+          @update:category="handleCategoryChange"
+        />
         <LatestWeddingNewsList
-          v-for="articleList in articles"
-          :key="articleList.id"
-          :id="getDivId(articleList.id)"
-          :visible="articleList.id === 1"
-          :articles="articleList.articles"
+          :articles="selectedArticles"
+          :visible="true"
           with-button
         />
       </div>
@@ -22,53 +18,75 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { useLatestNewsStore } from '~/store/home/latestNews'
 import LatestWeddingNewsCategories from './LatestWeddingNewsCategories.vue'
 import LatestWeddingNewsList from './LatestWeddingNewsList.vue'
-import { useLatestNewsStore } from '~/store/home/latestNews.ts'
 import PageSection from '~/components/generic/PageSection/PageSection.vue'
 
-const store = useLatestNewsStore()
-const categories = computed(() => store.categories)
-console.log('latest items:', categories);
+const latestNewsStore = useLatestNewsStore()
 
-const articles = computed(() => store.articles)
+const subtitle = 'Expert wedding planning tips & inspiration'
+const title = 'Latest Wedding News'
 
-function getDivId(id) {
-  return `category-${id}-articles`
+const categories = computed(() => latestNewsStore.categories)
+const allArticles = computed(() => latestNewsStore.articles)
+
+// ✅ Default selected category
+const selectedCategoryId = ref(null)
+
+watch(categories, (val) => {
+  if (val?.length && !selectedCategoryId.value) {
+    selectedCategoryId.value = val[0].id
+  }
+}, { immediate: true })
+
+// ✅ Filter articles for the selected category
+const selectedArticles = computed(() =>
+  allArticles.value.find(item => item.id === selectedCategoryId.value)?.articles || []
+
+)
+console.log("ima" ,selectedArticles.value[0]?.image?.medium?.url)
+
+
+function handleCategoryChange(id) {
+  selectedCategoryId.value = id
 }
 </script>
 
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 // @import "~/assets/styles/partials";
 
 .latest-news {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1 1 100%;
-
-  .latest-news__news-wrapper {
     display: flex;
+    align-items: center;
     flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
+    flex: 1 1 100%;
 
-    @include medium-and-large-screens {
-      flex-direction: row;
+
+    .latest-news__news-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+
+        @include medium-and-large-screens {
+            flex-direction: row;
+        }
     }
-  }
 }
 
 .latest-news-container {
-  ::v-deep {
-    @include small-and-medium-screens {
-      .body.body {
-        margin-top: 0;
-        padding-top: 10px;
-      }
+    ::v-deep {
+
+        @include small-and-medium-screens {
+            .body.body {
+                margin-top: 0;
+                padding-top: 10px;
+            }
+        }
     }
-  }
 }
+
 </style>

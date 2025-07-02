@@ -94,7 +94,6 @@ export default {
             return this.resources.length > 0
         },
         sliderImages() {
-            //console.log(this.landscapeGalleryImages);
             return this.landscapeGalleryImages;
         },
         sizes() {

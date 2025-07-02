@@ -60,6 +60,10 @@
 </template>
 
 <script setup>
+import Button from '../Button/Button.vue';
+import Category from '../Category/Category.vue';
+import Photo from '../Photo/Photo.vue';
+
 const props = defineProps({
   title: { type: String, required: true },
   category: { type: [String, Boolean], default: false },

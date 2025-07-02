@@ -1,4 +1,3 @@
-// store/home/newRealWeddings.js
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
@@ -20,7 +19,7 @@ export const useHomeNewRealWeddingsStore = defineStore('homeNewRealWeddings', ()
     }))
   })
 
-  // actions
+  
   function hydrate(newData) {
     data.value = newData ?? []
   }

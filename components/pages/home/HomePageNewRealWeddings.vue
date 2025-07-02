@@ -3,7 +3,7 @@
     <TriplePreviewOverflow>
       <TriplePreviewOverflowItem
         v-for="item in items"
-        :key="item.key"
+        :key="item.id"
         :category="item.category"
         :categoryLinkTo="weddingCategoryPath(item.category)"
         :image="item.image"
@@ -14,46 +14,43 @@
       />
     </TriplePreviewOverflow>
 
-    <Link :to="linkTo" class="see-more-button" without-styles>
+    <NuxtLink :to="linkTo" class="see-more-button" without-styles>
       <Button class="latest-news__see-more-btn">More real weddings</Button>
-    </Link>
+    </NuxtLink>
 
-    <!--
-    <DesktopView>
-      <AdUnit ad-slot-name="homePageNewRealWeddings"/>
+    <!-- Optional Ads -->
+    <!-- <DesktopView>
+      <AdUnit ad-slot-name="homePageNewRealWeddings" />
     </DesktopView>
     <MobileView>
-      <AdUnit ad-slot-name="homePageNewRealWeddingsMobile"/>
-    </MobileView>
-    -->
+      <AdUnit ad-slot-name="homePageNewRealWeddingsMobile" />
+    </MobileView> -->
   </PageSection>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import Button from '~/components/generic/Button/Button.vue'
+import PageSection from '~/components/generic/PageSection/PageSection.vue'
+import TriplePreviewOverflow from '~/components/generic/TriplePreviewOverflow/TriplePreviewOverflow.vue'
+import TriplePreviewOverflowItem from '~/components/generic/TriplePreviewOverflow/TriplePreviewOverflowItem.vue'
+import { useHomeNewRealWeddingsStore } from '~/store/home/newRealWeddings'
 
-// Static data
 const title = 'New Real Weddings'
 const linkTo = '/weddings'
 
-// Access Vuex store
-const store = useStore()
-const items = computed(() => store.getters['home/newRealWeddings/items'])
+const store = useHomeNewRealWeddingsStore()
+const items = computed(() => store.items || [])
 
-// Utility functions
-const weddingDetailsPath = (item) => `/weddings/${item.linkTo}/${item.id}`
-
-const weddingCategoryPath = (category) => {
-  const categoryId = category.toLowerCase().replace(/ /g, '_')
-  return {
-    name: 'weddings-search-category-categoryType-categoryId',
-    params: {
-      categoryType: 'event_type',
-      categoryId,
-    },
-  }
+function weddingDetailsPath(item) {
+  return `/weddings/${item.linkTo}/${item.id}`
 }
+
+function weddingCategoryPath(category) {
+  const categoryId = category.toLowerCase().replace(/ /g, '_')
+  return `/weddings/search/category/event_type/${categoryId}`
+}
+
 </script>
 
 <style scoped lang="scss">

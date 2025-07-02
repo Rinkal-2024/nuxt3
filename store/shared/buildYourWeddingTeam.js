@@ -1,25 +1,17 @@
-export const state = () => ({
+import { defineStore } from 'pinia'
+
+export const useBuildYourWeddingTeamStore = defineStore('buildYourWeddingTeam', {
+  state: () => ({
     data: []
+  }),
+
+  getters: {
+    vendorCategories: (state) => state.data
+  },
+
+  actions: {
+    hydrate(data) {
+      this.data = data ?? []
+    }
+  }
 })
-
-export const getters = {
-    vendorCategories: state => {
-        return state.data
-    }
-}
-
-export const mutations = {
-
-    SET_DATA (state, data) {
-        state.data = data
-    }
-
-}
-
-export const actions = {
-
-    hydrate({ commit }, data) {
-        commit('SET_DATA', data)
-    }
-
-}

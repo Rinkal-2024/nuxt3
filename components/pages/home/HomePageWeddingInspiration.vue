@@ -17,40 +17,41 @@
         withHoverLink
       />
     </Cards>
-    <!-- <MobileView>
+
+    <!-- Optional mobile-only button -->
+    <!--
+    <MobileView>
       <div class="see-more-button-container">
-        <Link to="/inspiration/images" without-styles>
+        <NuxtLink to="/inspiration/images" class="no-style">
           <Button variant="primary">More Inspiration</Button>
-        </Link>
+        </NuxtLink>
       </div>
-    </MobileView> -->
+    </MobileView>
+    -->
   </PageSection>
 </template>
 
 <script setup>
-// Import necessary Nuxt 3 and Vue 3 functionalities
-import { ref, computed } from 'vue'
-import { useStore } from 'pinia'
+import { computed } from 'vue'
+import PageSection from '~/components/generic/PageSection/PageSection.vue'
+import Cards from '~/components/generic/Cards/Cards.vue'
 
-// Title and subtitle values
+import { useHomeWeddingInspirationStore } from '~/store/home/weddingInspiration'
+import CardStyle3 from '~/components/generic/Cards/CardStyle3.vue'
+
 const title = 'Wedding Inspiration'
 const subtitle = 'Search our photo library by color & category for great wedding ideas'
 
-// Use the Pinia store or state management (useState for Nuxt 3 store)
-const store = useStore()
-
-// Replacing mapGetters with Composition API
-const isMobile = computed(() => store.global.config.isMobile)
-const items = computed(() => store.home.weddingInspiration.items)
-
-// Method for generating gallery link
-const galleryCategoryLink = (item) => {
+const store = useHomeWeddingInspirationStore()
+const items = computed(() => store.items || [])
+function galleryCategoryLink(item) {
   return `/inspiration/images/category/${item.linkTo}`
 }
 </script>
 
 <style scoped lang="scss">
-// Scoped styles for the component
+// @import "~/assets/styles/partials";
+
 .home-page-wedding-inspiration {
   .cards {
     flex-direction: row;

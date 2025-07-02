@@ -1,8 +1,7 @@
-// store/home/weddingsCarousel.js
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 
-export const useHomeWeddingsCarouselStore = defineStore('homeWeddingsCarousel', () => {
+export const useWeddingsCarouselStore = defineStore('homeWeddingsCarousel', () => {
   const data = ref([])
 
   const items = computed(() =>

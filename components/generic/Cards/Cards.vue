@@ -5,7 +5,6 @@
 </template>
 
 <script setup>
-// No logic needed in script setup for this simple layout wrapper
 </script>
 
 <style scoped lang="scss">

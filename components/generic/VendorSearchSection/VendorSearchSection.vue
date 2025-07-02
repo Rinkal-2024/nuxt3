@@ -10,6 +10,8 @@
 </template>
 
 <script setup lang="ts">
+import PageSection from '../PageSection/PageSection.vue';
+
 defineProps({
   title: {
     type: String,
