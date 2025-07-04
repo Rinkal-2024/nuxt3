@@ -12,22 +12,24 @@ defineOptions({
 })
 </script>
 
-<style scoped lang="scss">
+
+<style lang="scss" scoped>
 // @import "~/assets/styles/partials";
 
 .cards {
-  @include medium-and-large-screens {
-    margin-top: 1rem;
-  }
+    @include medium-and-large-screens {
+        margin-top: 1rem;
+    }
 }
 
 ::v-deep .card {
-  margin-top: 1rem;
+    margin-top: 1rem;
 
-  &:hover {
-    .content {
-      top: -1rem;
+    &:hover {
+        .content {
+            top: -1rem;
+        }
     }
-  }
 }
+
 </style>

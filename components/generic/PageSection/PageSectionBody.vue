@@ -70,87 +70,95 @@ const parsedDescriptionHtml = computed(() => {
 // @import "~/assets/styles/partials";
 
 .section {
-  margin: 2rem 0 0 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    margin: 2rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-  @include medium-and-large-screens {
-    margin: 3rem 0 0 0;
-  }
-
-  @include small-and-medium-screens {
-    .body {
-      margin-top: 30px;
-    }
-  }
-
-  &.topBorder {
-    &::before {
-      content: "";
-      position: relative;
-      top: 1.5rem;
-      width: 100%;
-      height: 1px;
-      background-color: $color-light-grey;
-    }
-  }
-
-  .title {
-    @include apply-font-and-size("heading", 2);
-    font-style: normal;
-    text-align: center;
-    font-weight: 100;
     @include medium-and-large-screens {
-      @include apply-font-and-size("heading", 1);
+        margin: 3rem 0 0 0;
     }
-  }
 
-  .subtitle {
-    margin: 0.5rem 0 0 0;
-    @include apply-font-and-size("heading", 3);
-    font-weight: 100;
-    font-style: italic;
-    text-align: center;
-    white-space: pre-line;
-    ::v-deep p {
-      @include apply-font-and-size("heading", 3);
+    @include small-and-medium-screens {
+        .body {
+            margin-top: 30px;
+        }
     }
-  }
 
-  .description {
-    display: block;
-    margin: 1rem 0 0 0;
-    @include medium-and-large-screens {
-      margin: 1rem 20% 0;
-      @include apply-font-and-size("heading", 4);
+    &.topBorder {
+        &::before {
+            content: "";
+            position: relative;
+            top: 1.5rem;
+            width: 100%;
+            height: 1px;
+            background-color: $color-light-grey;
+        }
     }
-  }
 
-  .description,
-  .description ::v-deep p {
-    @include apply-font-and-size("heading", 4);
-    font-weight: 100;
-    text-align: center;
-  }
+    .title {
+        @include apply-font-and-size("heading", 2);
+        font-style: normal;
+        //text-transform: capitalize;
+        text-align: center;
+        font-weight: 100;
+        //padding-bottom: 1rem;
+        @include medium-and-large-screens {
+            @include apply-font-and-size("heading", 1);
+        }
+    }
 
-  .description ::v-deep p:first-child {
-    margin-top: 0;
-  }
+    .subtitle {
+        margin: 0.5rem 0 0 0;
+        @include apply-font-and-size("heading", 3);
+        font-weight: 100;
+        font-style: italic;
+        text-align: center;
+        white-space: pre-line;
+        ::v-deep p {
+            @include apply-font-and-size("heading", 3);
+        }
+    }
 
-  .body {
-    width: 100%;
-    padding-top: 2rem;
-  }
+    .description {
+        display: block;
+        margin: 1rem 0 0 0;
+        @include medium-and-large-screens {
+            margin: 1rem 20% 0;
+            @include apply-font-and-size("heading", 4);
+        }
+    }
 
-  .withoutVerticalMargins {
-    margin-top: 0;
-    margin-bottom: 0;
+    .description, .description ::v-deep p {
+        @include apply-font-and-size("heading", 4);
+        //font-size: 0.9rem;
+        font-weight: 100;
+        text-align: center;
+
+        //@include medium-and-large-screens {
+        //    @include apply-font-and-size("heading", 4);
+        //}
+    }
+
+    .description ::v-deep p:first-child {
+        margin-top: 0;
+    }
 
     .body {
-      margin-top: 0;
+        width: 100%;
+        padding-top: 2rem;
     }
-  }
+
+    .withoutVerticalMargins {
+        margin-top: 0;
+        margin-bottom: 0;
+
+        .body {
+            margin-top: 0;
+        }
+    }
 }
+
 </style>
+

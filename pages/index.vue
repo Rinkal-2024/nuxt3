@@ -14,6 +14,9 @@ import { useHomeNewRealWeddingsStore } from "~/store/home/newRealWeddings";
 import { useHomeWeddingInspirationStore } from "~/store/home/weddingInspiration";
 import BuildYourWeddingTeam from "~/components/shared/sections/BuildYourWeddingTeam/BuildYourWeddingTeam.vue";
 import { useBuildYourWeddingTeamStore } from "~/store/shared/buildYourWeddingTeam";
+import { useGetToKnowStore } from "~/store/shared/getToKnow";
+import { useHomeLocationsWeLoveStore } from "~/store/home/locationsWeLove";
+import { useHomeHoneymoonsWidgetStore } from "~/store/home/honeymoonsWidget";
 
 
 const LazyHomePageWeddingsCarousel = defineAsyncComponent(() =>
@@ -62,6 +65,10 @@ const weddingsCarouselStore = useWeddingsCarouselStore()
 const newRealWeddingsStore = useHomeNewRealWeddingsStore()
 const newWeddingInspirationStore = useHomeWeddingInspirationStore();
 const newBuildYourWeddingTeamStore = useBuildYourWeddingTeamStore();
+const getToKnowStore = useGetToKnowStore();
+const locationsWeLove = useHomeLocationsWeLoveStore();
+const newHoneymoonsWidgetStore = useHomeHoneymoonsWidgetStore();
+
 const { data: fetchedData, error } = await useAsyncData(
   "homeData",
   async () => {
@@ -92,9 +99,12 @@ if (fetchedData.value) {
   newRealWeddingsStore.hydrate(fetchedData.value.items?.[0]?.new_weddings || [])
   newWeddingInspirationStore.hydrate(fetchedData.value.items?.[0]?.gallery_categories || []);
   newBuildYourWeddingTeamStore.hydrate(fetchedData.value.items?.[0]?.vendor_categories || []);
+  getToKnowStore.hydrate(fetchedData.value.items?.[0]?.vendor_widget || []);
+  locationsWeLove.hydrate(fetchedData.value.items?.[0].location_widget || []);
+  newHoneymoonsWidgetStore.hydrate(fetchedData.value.items[0].honeymoon_widget || [])
+
 }
 const homePageCarouselItems = computed(() => newsCarouselStore.items);
-console.log("homePageCarouselItems", homePageCarouselItems.value);
 const head = apiStore.head || {};
 
 head.script ||= [];
@@ -133,61 +143,20 @@ useHead(head);
 
 <template>
   <div>
-    <ClientOnly>
-      <HomePageNewsCarousel />
-    </ClientOnly>
-
-    <template v-if="$isAMP">
-      <amp-carousel
-        id="home-page-news-carousel"
-        height="320"
-        layout="fixed-height"
-        loop
-        on="slideChange:carousel-dots.toggle(index=event.index, value=true)"
-        type="slides"
-      >
-        <CarouselItem
-          v-for="(item, index) in homePageCarouselItems"
-          :key="item.id"
-          :amp-photo-height="320"
-          :image="item.image"
-          :lazy="index > 1"
-          :subtitle="item.subtitle"
-          :title="item.title"
-          :to="item.linkTo"
-          with-photo-credits-position="topRight"
-        />
-      </amp-carousel>
-
-      <amp-selector
-        id="carousel-dots"
-        class="carousel-dots"
-        layout="container"
-        on="select:home-page-news-carousel.goToSlide(index=event.targetOption)"
-      >
-        <button
-          v-for="(_, index) in homePageCarouselItems"
-          :key="index"
-          :id="`dot--${index}`"
-          :option="index"
-          :selected="index === 0"
-        />
-      </amp-selector>
-    </template>
+    <HomePageNewsCarousel v-if="homePageCarouselItems.length" />
     <HomePageLatestWeddingNews />
-    <HomePageWeddingsCarousel />
-    
-    <Suspense>
-      <LazyHomePageNewRealWeddings />
-    </Suspense>
-
+    <LazyHomePageWeddingsCarousel />
+    <LazyHomePageNewRealWeddings />
     <LazyPageSectionSeparator />
-    <Suspense>
-      <LazyHomePageWeddingInspiration />
-    </Suspense>
-
-      <ClientOnly>
-      <BuildYourWeddingTeam v-if="!$isAMP" />
-    </ClientOnly>
+    <LazyHomePageWeddingInspiration />
+    <LazyBuildYourWeddingTeam />
+    <LazyGetToKnowSection />
+    <LazyPageSectionSeparator />
+    <LazyLocationsWeLove />
+    <LazyPageSectionSeparator />
+    <LazyHomePageHoneymoonsDestination />
+    <LazyPageSectionSeparator />
+    <LazyHomePageWebsiteDescription />
   </div>
 </template>
+

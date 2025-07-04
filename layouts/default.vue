@@ -10,14 +10,14 @@
     </div>
 
     <!-- Uncomment when needed -->
-    <!-- <NewsletterSignup
+    <NewsletterSignup
       v-if="showNewsletterSignup"
       is-footer
       subtitle="Get inspiring wedding ideas and planning tips from Inside Weddings via email."
       title="Free Membership!"
-    /> -->
+    />
 
-    <!-- <TheFooter /> -->
+    <TheFooter />
     <!-- <AdUnitFixed ad-slot-name="stickyFooter" /> -->
   </div>
 </template>
@@ -29,6 +29,8 @@ import { useConfigStore } from '~/store/global/config'
 import { processAdsOnPage } from '~/utils/adapex'
 import { isNewsListPage as checkIsNewsListPage } from '~/utils/header'
 import TheHeader from '~/components/global/Header/TheHeader.vue'
+import NewsletterSignup from '~/components/generic/NewsletterSignup/NewsletterSignup.vue'
+import TheFooter from '~/components/global/Footer/TheFooter.vue'
 // import { reloadAds } from '~/utils/ads'
 
 const config = useConfigStore()
@@ -98,21 +100,22 @@ watch(
 )
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 $news-categories-offset: 57px;
 $desktop-top-offset: 165px;
 $mobile-top-offset: 3rem;
 
 .body {
-  margin-top: $mobile-top-offset;
-  min-height: 100vh;
 
-  @include medium-and-large-screens {
-    margin-top: $desktop-top-offset;
+    margin-top: $mobile-top-offset;    
+    min-height: 100vh; 
 
-    &.--with-news-categories-menu {
-      margin-top: $desktop-top-offset + $news-categories-offset;
+    @include medium-and-large-screens {       
+        margin-top: $desktop-top-offset;
+
+        &.--with-news-categories-menu {
+            margin-top: $desktop-top-offset + $news-categories-offset
+        }
     }
-  }
 }
 </style>

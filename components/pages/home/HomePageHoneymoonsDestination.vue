@@ -24,17 +24,18 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useStore } from 'vuex'
+import Cards from '~/components/generic/Cards/Cards.vue'
+import CardStyle2 from '~/components/generic/Cards/CardStyle2.vue'
+import PageSection from '~/components/generic/PageSection/PageSection.vue'
+import { useHomeHoneymoonsWidgetStore } from '~/store/home/honeymoonsWidget'
 
-// Constants
 const title = 'Honeymoons & Destination Weddings'
 const subtitle = 'Travel updates from luxury destinations and resorts'
 
-// Access Vuex store
-const store = useStore()
-const items = computed(() => store.getters['home/honeymoonsWidget/items'])
+const store = useHomeHoneymoonsWidgetStore()
 
-// Helper function
+const items = computed(() => store.items || [])
+
 const newsLink = (newsItem) => `/news/travel-honeymoon/${newsItem.linkTo}/${newsItem.id}`
 </script>
 

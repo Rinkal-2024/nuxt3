@@ -7,12 +7,12 @@
             ></div>
         </template>
         <template v-else>
-            <template v-for="(paragraph, index) in splitBody" >
-                <div :key="index" v-html="paragraph"/>
-                <div :key="index" v-if="insertAdAfterParagraph(index) === 1" class="ad-container">
+            <template v-for="(paragraph, index) in splitBody" :key="index">
+                <div v-html="paragraph"/>
+                <div v-if="insertAdAfterParagraph(index) === 1" class="ad-container">
                     <AdUnit ad-slot-name="weddingArticleParagraph1" minHeight="300" />
                 </div>
-                <div :key="index" v-if="insertAdAfterParagraph(index) === 3" class="ad-container">
+                <div v-if="insertAdAfterParagraph(index) === 3" class="ad-container">
                     <AdUnit ad-slot-name="weddingArticleParagraph1" minHeight="300" />
                 </div>
             </template>

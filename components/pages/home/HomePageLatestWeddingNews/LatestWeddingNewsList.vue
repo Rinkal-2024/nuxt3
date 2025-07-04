@@ -6,11 +6,11 @@
         :key="article.id"
         :title="article.title"
         :subtitle="article.subtitle"
-        :link-to="getArticleLink(article)"
-        :image="article.image?.medium?.url"
-        :alt="article.image?.alt"
+        :link-to="articleLink(article)"
+        :image="article.image"
       />
     </Cards>
+
 
     <Button v-if="withButton" :to="categoryLink" class="latest-news__see-more-btn" replace>
       More {{ categoryName }} News
@@ -39,25 +39,23 @@ const props = defineProps({
   },
 })
 
-const categorySlug = computed(() => {
-  const article = props.articles?.[0]
-  return article?.category?.slug || article?.subcategory?.category?.slug || ''
+const categoryLink = computed(() => {
+  const firstArticle = props.articles[0]
+  const categorySlug = firstArticle?.category?.slug || firstArticle?.subcategory?.category?.slug
+  return `/news/${categorySlug}/`
 })
 
 const categoryName = computed(() => {
-  const article = props.articles?.[0]
-  return article?.category?.name || article?.subcategory?.category?.name || 'Category'
+  const firstArticle = props.articles[0]
+  return firstArticle?.category?.name || firstArticle?.subcategory?.category?.name || ''
 })
 
-const categoryLink = computed(() => {
-  return `/news/${categorySlug.value}/`
-})
-
-function getArticleLink(article) {
-  const catSlug = article?.category?.slug || article?.subcategory?.category?.slug || ''
-  return `/news/${catSlug}/${article.linkTo || ''}/${article.id}`
+function articleLink(article) {
+  const categorySlug = article?.category?.slug || article?.subcategory?.category?.slug
+  return `/news/${categorySlug}/${article.linkTo}/${article.id}`
 }
 </script>
+
 
 <style lang="scss">
 
